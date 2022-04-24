@@ -1,8 +1,15 @@
 package com.revature.project0.bankinterfaces;
 
-import java.util.Scanner;
+import com.revature.project0.models.User;
+
+/*
+ * I still need a loop method. Needs to check input with scanner class somehow
+ * */
 
 public interface InterUtil {
+	
+	//This needs to go in the DAO
+	String checkForSameUsername(String Username);
 	
 	//checks if value is in range for welcome menu
 	boolean validWelcomeMenuInt(int menuInput);
@@ -16,20 +23,11 @@ public interface InterUtil {
 	//checks if value is in range for admin menu
 	boolean validAdminMenuInt(int menuInput);
 	
-	//This needs to go in the DAO
-	String checkForSameUsername(String Username);
+	// this will login user on console, incorporate with loop somehow
+	User login();
 	
-	double getInitialDeposit();
-	
-	String registerUsername();
-	
-	String registerPassword();
-	
-	//use this whenever I need to know if the customer/employee/admin is accessing an account, return string
-	String checkUser();
-	
-	
-	//This was asking for an input twice for some reason
-//	int inputLoop(Scanner menuInput);
+	// this will register user on console, incorporate with loop somehow
+	User register();
+
 
 }

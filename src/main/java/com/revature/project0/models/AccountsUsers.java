@@ -1,14 +1,15 @@
 package com.revature.project0.models;
 
-public class AccountUsers {
+// this class links the user and accounts
+public class AccountsUsers {
 
 	private int id;
 	private int userId;
 	private int accountId;
 	
-	public AccountUsers(){ super(); }
+	public AccountsUsers(){ super(); }
 	
-	public AccountUsers(int id, int userId, int accountId) {
+	public AccountsUsers(int id, int userId, int accountId) {
 		this.id = id;
 		this.userId = userId;
 		this.accountId = accountId;

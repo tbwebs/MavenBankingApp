@@ -1,9 +1,9 @@
 package com.revature.project0.utilclasses;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.revature.project0.bankinterfaces.InterUtil;
+import com.revature.project0.models.User;
 
 //Where all my helper methods are
 public class ProjectUtil implements InterUtil {
@@ -13,31 +13,6 @@ public class ProjectUtil implements InterUtil {
 	//This method needs to go in the DAO, or wherever the users are stored
 	@Override
 	public String checkForSameUsername(String Username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double getInitialDeposit() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	@Override
-	public String registerUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String registerPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String checkUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,6 +59,18 @@ public class ProjectUtil implements InterUtil {
 			System.out.println(Janus.adminOops());
 			return false;
 		}
+	}
+
+	@Override
+	public User login() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User register() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -12,19 +12,7 @@ public class StringCleaner implements InterStringCleaner{
 	}
 
 	@Override
-	public double cleanDeposits(String input) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String cleanDates(String dateinput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String cleanPhoneNum(String inputPhoneNumber) {
+	public String cleanUsername(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
