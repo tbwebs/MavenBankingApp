@@ -1,14 +1,14 @@
 package com.revature.project0.models;
 
 // this class holds data to link status to account database, either pending/open/closed
-public class AccountStatus {
+public class Status {
 
 	private int statusId;
 	private String status;
 	
-	public AccountStatus() { super(); }
+	public Status() { super(); }
 	
-	public AccountStatus(int statusId, String status) {
+	public Status(int statusId, String status) {
 		this.statusId = statusId;
 		this.status = status;
 	}

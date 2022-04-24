@@ -3,20 +3,20 @@ package com.revature.project0.models;
 import java.util.ArrayList;
 
 //Holds columns for account database. AccountType will be joing or personal, and status will be pending/open/closed
-abstract class Account {
+public class Account {
 	
 	private int accountId;
 	private long accountNumber;
 	private long routingNumber;
 	private double balance;
-	private AccountType type;
-	private AccountStatus status;
+	private Type type;
+	private Status status;
 	
 	
 	public Account() { super(); }
 	
 	//for joint account
-	public Account(int accountId, double initialBalance, AccountType type, AccountStatus status) {
+	public Account(int accountId, double initialBalance, Type type, Status status) {
 		this.accountId = accountId;
 		this.accountNumber = generateAccountNumber();
 		this.routingNumber = generateRoutingNumber();
@@ -83,19 +83,19 @@ abstract class Account {
 		this.balance = newBalance;
 	}
 	
-	public AccountStatus getStatus() {
+	public Status getStatus() {
 		return this.status;
 	}
 	
-	public void setStatus(AccountStatus newStatus) {
+	public void setStatus(Status newStatus) {
 		this.status = newStatus;
 	}
 	
-	public AccountType getType() {
+	public Type getType() {
 		return type;
 	}
 	
-	public void setType(AccountType newType) {
+	public void setType(Type newType) {
 		this.type = newType;
 	}
 

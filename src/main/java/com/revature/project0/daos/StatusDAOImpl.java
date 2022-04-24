@@ -1,5 +1,5 @@
 package com.revature.project0.daos;
 
-public class AccountTypeDAOImpl {
+public class StatusDAOImpl {
 
 }
