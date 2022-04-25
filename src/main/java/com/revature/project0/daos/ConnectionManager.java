@@ -10,7 +10,7 @@ public class ConnectionManager {
 	
 	private static String connectionString = "jdbc:postgresql://heffalump.db.elephantsql.com:5432/btvmiven",
 			username = "btvmiven",
-			password = "RRvhWr2rLT4shGYukK9OLn8lceKo0uDlP";
+			password = "RvhWr2rLT4shGYukK9OLn8lceKo0uDlP";
 	
 	public static Connection getConnection() {
 		try {

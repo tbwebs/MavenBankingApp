@@ -1,5 +1,6 @@
 package com.revature.project0.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.project0.models.User;
@@ -14,7 +15,9 @@ public interface UserDAO {
 	
 	public User getUserByAccountId(int accountId);
 	
-	public List<User> getAllUsers();
+	public ArrayList<User> getAllUsers();
+	
+	public ArrayList<String> getAllUsernames();
 
 	public void updateUser(User currentUser);
 	
