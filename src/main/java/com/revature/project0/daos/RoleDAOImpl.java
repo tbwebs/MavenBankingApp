@@ -18,7 +18,7 @@ public class RoleDAOImpl implements RoleDAO {
 	public ArrayList<Role> getAllRoles() {
 		
 		ArrayList<Role> rolesList = new ArrayList<Role>();
-		String query = "SELECT * From user_role";
+		String query = "SELECT * FROM user_role";
 		
 		try {
 			

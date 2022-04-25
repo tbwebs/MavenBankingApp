@@ -1,6 +1,6 @@
 package com.revature.project0.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.revature.project0.models.Account;
 
@@ -25,7 +25,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public List<Account> getAllAccounts() {
+	public ArrayList<Account> getAllAccounts() {
 		// TODO Auto-generated method stub
 		return null;
 	}

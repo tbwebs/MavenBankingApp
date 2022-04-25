@@ -1,13 +1,15 @@
 package com.revature.project0.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.revature.project0.models.Status;
 
 public interface StatusDAO {
 	
-	public List<Status> getAllStatuses();
-	
 	public void createStatus(Status status);
+	
+	public ArrayList<Status> getAllStatuses();
+	
+	
 
 }

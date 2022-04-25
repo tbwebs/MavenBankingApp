@@ -1,6 +1,6 @@
 package com.revature.project0.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.revature.project0.models.Account;
 
@@ -12,7 +12,7 @@ public interface AccountDAO {
 	
 	public Account getAccountByUser(String username);
 	
-	public List<Account> getAllAccounts();
+	public ArrayList<Account> getAllAccounts();
 
 	public void updateAccount(Account currentAccount);
 	
