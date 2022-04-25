@@ -19,9 +19,10 @@ public class Driver {
 //		
 //		roleDAO.createRole(newRole);
 		
-//		UserDAOImpl userDAO = new UserDAOImpl();
+		UserDAOImpl userDAO = new UserDAOImpl();
 		
 //		User chloeTest = new User(1, "TEST chloe", "griffith", "cg@gmail.com", "pass", newRole);
+		
 		
 		
 				
