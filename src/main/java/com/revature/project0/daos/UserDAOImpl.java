@@ -166,20 +166,50 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-			
 		}
 	}
 
-	@Override
-	public void deleteUserById(User currentUser) {
-		// TODO Auto-generated method stub
+	@Override //NEED TO TEST
+	public void deleteUserById(int userId) {
+
+		String query = "DELETE FROM users WHERE user_id = ?";
 		
+		try {
+			
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setInt(1, userId);
+			pst.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	
 	}
 
-	@Override
+	@Override //NEED TO TEST
 	public ArrayList<String> getAllUsernames() {
-		// TODO Auto-generated method stub
-		return null;
+
+		ArrayList<String> usernameList = new ArrayList<String>();
+		
+		String query = "SELECT username FROM users";
+		
+		try {
+			
+			PreparedStatement pst = conn.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				
+				usernameList.add(rs.getString(1));
+			}
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return usernameList;
 	}
 
 }

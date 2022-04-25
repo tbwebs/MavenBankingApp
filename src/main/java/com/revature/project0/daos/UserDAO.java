@@ -21,7 +21,7 @@ public interface UserDAO {
 
 	public void updateUser(User currentUser);
 	
-	public void deleteUserById(User currentUser);
+	public void deleteUserById(int userId);
 	
 	
 }
