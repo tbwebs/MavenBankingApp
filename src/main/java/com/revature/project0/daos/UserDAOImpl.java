@@ -138,7 +138,6 @@ public class UserDAOImpl implements UserDAO {
 						new Role(rs.getInt(6), rs.getString(7))));
 			}
 			
-			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -165,6 +164,8 @@ public class UserDAOImpl implements UserDAO {
 			pst.execute();
 			
 		} catch (SQLException e) {
+			
+			e.printStackTrace();
 			
 		}
 	}
