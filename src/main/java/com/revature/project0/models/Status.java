@@ -14,7 +14,7 @@ public class Status {
 	}
 
 	public int getStatusId() {
-		return statusId;
+		return this.statusId;
 	}
 
 	public void setStatusId(int statusId) {
@@ -22,7 +22,7 @@ public class Status {
 	}
 
 	public String getStatus() {
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(String status) {

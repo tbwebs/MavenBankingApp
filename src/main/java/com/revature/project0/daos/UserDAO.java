@@ -6,7 +6,7 @@ import com.revature.project0.models.User;
 
 public interface UserDAO {
 
-	public void createUser(User newUser);
+	public int createUser(User newUser);
 	
 	public User getUserById(int userId);
 	

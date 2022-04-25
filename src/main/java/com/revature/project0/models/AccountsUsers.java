@@ -16,7 +16,7 @@ public class AccountsUsers {
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -24,7 +24,7 @@ public class AccountsUsers {
 	}
 
 	public int getUserId() {
-		return userId;
+		return this.userId;
 	}
 
 	public void setUserId(int userId) {
@@ -32,7 +32,7 @@ public class AccountsUsers {
 	}
 
 	public int getAccountId() {
-		return accountId;
+		return this.accountId;
 	}
 
 	public void setAccountId(int accountId) {

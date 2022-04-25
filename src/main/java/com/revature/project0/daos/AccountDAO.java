@@ -6,7 +6,7 @@ import com.revature.project0.models.Account;
 
 public interface AccountDAO {
 
-	public void createAccount(Account newAccount);
+	public int createAccount(Account newAccount);
 	
 	public Account getAccountById(int accountId);
 	

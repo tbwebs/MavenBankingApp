@@ -14,7 +14,7 @@ public class Type {
 	}
 
 	public int getTypeId() {
-		return typeId;
+		return this.typeId;
 	}
 
 	public void setTypeId(int typeId) {
@@ -22,7 +22,7 @@ public class Type {
 	}
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(String type) {

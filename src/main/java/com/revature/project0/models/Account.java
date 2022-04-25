@@ -1,7 +1,5 @@
 package com.revature.project0.models;
 
-import java.util.ArrayList;
-
 //Holds columns for account database. AccountType will be joing or personal, and status will be pending/open/closed
 public class Account {
 	

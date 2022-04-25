@@ -4,7 +4,7 @@ import com.revature.project0.models.AccountsUsers;
 
 public interface AccountsUsersDAO {
 
-	public void createAccountUserLink(AccountsUsers link);
+	public int createAccountUserLink(AccountsUsers link);
 	
 	public AccountsUsers getAccountUserLinkById(int accountUserId);
 	
