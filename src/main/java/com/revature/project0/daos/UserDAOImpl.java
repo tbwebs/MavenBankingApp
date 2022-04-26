@@ -14,7 +14,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	private Connection conn = ConnectionManager.getConnection();
 
-	@Override
+	@Override //TESTED
 	public int createUser(User newUser) {
 		
 		String query = "INSERT INTO users(first_name, last_name, username, email, pass_word, user_role_id) VALUES (?, ?, ?, ?, ?, ?)";
@@ -116,11 +116,11 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED 
 	public ArrayList<User> getAllUsers() {
 		
 		ArrayList<User> userList = new ArrayList<User>();
-		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM INNER JOIN user_role ON users.user_role_id = user_role.user_role_id ORDER BY users.user_id ASC";
+		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM users INNER JOIN user_role ON users.user_role_id = user_role.user_role_id ORDER BY users.user_id ASC";
 		
 		try {
 			
@@ -133,9 +133,9 @@ public class UserDAOImpl implements UserDAO {
 						rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3),
-						rs.getString(4),
 						rs.getString(5),
-						new Role(rs.getInt(6), rs.getString(7))));
+						rs.getString(6),
+						new Role(rs.getInt(7), rs.getString(8))));
 			}
 			
 		} catch (SQLException e) {
@@ -146,10 +146,10 @@ public class UserDAOImpl implements UserDAO {
 		return userList;
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void updateUser(User currentUser) {
 		
-		String query = "UPDATE users SET fist_name = ?, last_name = ?, username = ?, email = ?, pass_word = ?, user_role_id = ? WHERE user_id = ?";
+		String query = "UPDATE users SET first_name = ?, last_name = ?, username = ?, email = ?, pass_word = ?, user_role_id = ? WHERE user_id = ?";
 		
 		try {
 			
@@ -169,7 +169,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void deleteUserById(int userId) {
 
 		String query = "DELETE FROM users WHERE user_id = ?";
@@ -187,7 +187,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public ArrayList<String> getAllUsernames() {
 
 		ArrayList<String> usernameList = new ArrayList<String>();

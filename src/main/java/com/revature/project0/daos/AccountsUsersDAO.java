@@ -12,7 +12,7 @@ public interface AccountsUsersDAO {
 	
 	public AccountsUsers getAccountUserByUser(int userId);
 	
-	public AccountsUsers getAccountuserByAccoutn(int accountId);
+	public AccountsUsers getAccountUserByAccoutNum(int accountId);
 	
 	public void deleteAccountUserById(int linkId);
 	

@@ -10,12 +10,14 @@ public interface AccountDAO {
 	
 	public Account getAccountById(int accountId);
 	
-	public Account getAccountByUser(String username);
+	public ArrayList<Account> getAccountsbyUserId(int userId);
 	
 	public ArrayList<Account> getAllAccounts();
+	
+	public ArrayList<Account> getAccountsByStatus(String status);
 
 	public void updateAccount(Account currentAccount);
 	
-	public void deleteAccountById(Account currentAccount);
+	public void deleteAccountById(int account_id);
 	
 }

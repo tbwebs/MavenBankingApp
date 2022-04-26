@@ -13,18 +13,23 @@ public class Driver {
 		
 	public static void main(String[] args) {
 
-//		RoleDAOImpl roleDAO = new RoleDAOImpl();
-		
-//		Role newRole = new Role(1, "customer");
-//		
-//		roleDAO.createRole(newRole);
-		
+		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		UserDAOImpl userDAO = new UserDAOImpl();
 		
-//		User chloeTest = new User(1, "TEST chloe", "griffith", "cg@gmail.com", "pass", newRole);
+		Role newRole = new Role(1, "customer");
 		
+		Role vicRole = new Role(2, "customer");
+
+//		roleDAO.createRole(newRole);
+//		roleDAO.createRole(vicRole);
+
+		User chloeTest = new User(1, "TEST chloe", "griffith", "cg@gmail.com", "pass", newRole);
 		
+		User victorTest = new User(2, "TEST vic", "griffin", "vg@gmail.com", "vpass", vicRole);
+	
+//		userDAO.createUser(victorTest);
+//		userDAO.createUser(chloeTest);
 		
-				
+	
 	}
 }
