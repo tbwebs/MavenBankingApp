@@ -72,6 +72,29 @@ public class ProjectUtil implements InterUtil {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public static long generateAccountNumber() {
+		
+		int min = 1;
+		long max = 10000000000000000L;
+		
+		long randomNumber = (long) Math.floor(Math.random()*(max-min+1)+min);
+		
+		return randomNumber;
+	}
+	
+	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
+	// 9 digits
+	public static long generateRoutingNumber() {
+		
+		int min = 1;
+		long max = 100000000L;
+		
+		long randomNumber = (long) Math.floor(Math.random()*(max-min+1)+min);
+		
+		return randomNumber;
+		
+	}
 
 	
 	//This catches InputMismatchException for menu selection screen

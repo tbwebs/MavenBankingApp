@@ -14,38 +14,13 @@ public class Account {
 	public Account() { super(); }
 	
 	//for joint account
-	public Account(int accountId, double initialBalance, Type type, Status status) {
+	public Account(int accountId, long accountNumber, long routingNumber, double initialBalance, Type type, Status status) {
 		this.accountId = accountId;
-		this.accountNumber = generateAccountNumber();
-		this.routingNumber = generateRoutingNumber();
+		this.accountNumber = accountNumber;
+		this.routingNumber = routingNumber;
 		this.balance = initialBalance;
 		this.type = type;
 		this.status = status;
-		
-	}
-	
-	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
-	// 17 digits
-	private long generateAccountNumber() {
-		
-		int min = 1;
-		long max = 10000000000000000L;
-		
-		long randomNumber = (long) Math.floor(Math.random()*(max-min+1)+min);
-		
-		return randomNumber;
-	}
-	
-	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
-	// 9 digits
-	private long generateRoutingNumber() {
-		
-		int min = 1;
-		long max = 100000000L;
-		
-		long randomNumber = (long) Math.floor(Math.random()*(max-min+1)+min);
-		
-		return randomNumber;
 		
 	}
 
@@ -77,7 +52,7 @@ public class Account {
 		return this.balance;
 	}
 	
-	public void setBalence(double newBalance) {
+	public void setBalance(double newBalance) {
 		this.balance = newBalance;
 	}
 	

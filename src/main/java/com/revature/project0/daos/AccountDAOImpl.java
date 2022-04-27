@@ -15,19 +15,21 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	private Connection conn = ConnectionManager.getConnection();
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public int createAccount(Account newAccount) {
 		
 		int creationId = 0;
-		String query = "INSERT INTO accounts (balance, account_type_id, account_status_id) VALUES (?, ?, ?)";
+		String query = "INSERT INTO accounts (account_num, routing_num, balance, account_type_id, account_status_id) VALUES (?, ?, ?, ?, ?)";
 		
 		try {
 			
 			PreparedStatement pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			
-			pst.setDouble(1, newAccount.getBalance());
-			pst.setInt(2, newAccount.getType().getTypeId());
-			pst.setInt(3, newAccount.getStatus().getStatusId());
+			pst.setLong(1, newAccount.getAccountNumber());
+			pst.setLong(2, newAccount.getRoutingNumber());
+			pst.setDouble(3,  newAccount.getBalance());
+			pst.setInt(4, newAccount.getType().getTypeId());
+			pst.setInt(5, newAccount.getStatus().getStatusId());
 			
 			pst.execute();
 			ResultSet rs = pst.getGeneratedKeys();
@@ -45,7 +47,7 @@ public class AccountDAOImpl implements AccountDAO {
 		return creationId;
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public Account getAccountById(int accountId) {
 		
 		Account account = new Account();
@@ -61,7 +63,7 @@ public class AccountDAOImpl implements AccountDAO {
 				account.setAccountId(rs.getInt(1));
 				account.setAccountNumber(rs.getLong(2));
 				account.setRoutingNumber(rs.getLong(3));
-				account.setBalence(rs.getDouble(4));
+				account.setBalance(rs.getDouble(4));
 				account.setType(new Type(rs.getInt(5), rs.getString(6)));
 				account.setStatus(new Status(rs.getInt(7), rs.getString(8)));
 			}
@@ -74,7 +76,7 @@ public class AccountDAOImpl implements AccountDAO {
 		return account;
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public ArrayList<Account> getAllAccounts() {
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
@@ -89,6 +91,8 @@ public class AccountDAOImpl implements AccountDAO {
 				
 				accountList.add(new Account(
 						rs.getInt(1),
+						rs.getLong(2),
+						rs.getLong(3),
 						rs.getDouble(4),
 						new Type(rs.getInt(5), rs.getString(6)),
 						new Status(rs.getInt(7), rs.getString(8))));
@@ -102,10 +106,10 @@ public class AccountDAOImpl implements AccountDAO {
 		return accountList;
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void updateAccount(Account currentAccount) {
 		
-		String query = "UPDATE accounts SET balance = ?, accout_type_id = ?, account_status_id = ? WHERE account_id = ?";
+		String query = "UPDATE accounts SET balance = ?, account_type_id = ?, account_status_id = ? WHERE account_id = ?";
 		
 		try {
 			
@@ -122,7 +126,7 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void deleteAccountById(int accountId) {
 		
 		String query = "DELETE FROM accounts WHERE account_id = ?";
@@ -156,6 +160,8 @@ public class AccountDAOImpl implements AccountDAO {
 				
 				accountList.add(new Account(
 						rs.getInt(1),
+						rs.getLong(2),
+						rs.getLong(3),
 						rs.getDouble(4),
 						new Type(rs.getInt(5), rs.getString(6)),
 						new Status(rs.getInt(7), rs.getString(8))));
@@ -185,6 +191,8 @@ public class AccountDAOImpl implements AccountDAO {
 				
 				accountList.add(new Account(
 						rs.getInt(1),
+						rs.getLong(2),
+						rs.getLong(3),
 						rs.getDouble(4),
 						new Type(rs.getInt(5), rs.getString(6)),
 						new Status(rs.getInt(7), rs.getString(8))));
