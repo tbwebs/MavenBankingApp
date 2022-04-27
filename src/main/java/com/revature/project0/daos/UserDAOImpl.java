@@ -110,11 +110,12 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
-	@Override //NEED TO TEST
-	public User getUserByAccountId(int accountId) {
+	@Override //TESTED
+	public ArrayList<User> getUsersByAccountId(int accountId) {
 		
-		User user = new User();
-		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.password, user_role.user_role_id, user_role.user_role FROM accounts_users INNER JOIN users ON accounts_users.user_id = users.user_id INNER JOIN user_role ON users.user_role_id ON user_role.user_role_id WHERE accounts_users.account_id = ?";
+		ArrayList<User> userList = new ArrayList<User>();
+		
+		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM accounts_users INNER JOIN users ON accounts_users.user_id = users.user_id INNER JOIN user_role ON users.user_role_id = user_role.user_role_id WHERE accounts_users.account_id = ?";
 		
 		try {
 			
@@ -122,21 +123,20 @@ public class UserDAOImpl implements UserDAO {
 			pst.setInt(1, accountId);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
-				user.setUserId(rs.getInt(1));
-				user.setFirstName(rs.getString(2));
-				user.setLastName(rs.getString(3));
-				user.setUsername(rs.getString(4));
-				user.setEamil(rs.getString(5));
-				user.setPassword(rs.getString(6));
-				user.setRole(new Role(rs.getInt(7), rs.getString(8)));
-				
+				userList.add(new User(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(5),
+						rs.getString(6),
+						new Role(rs.getInt(7), rs.getString(8))));
 			}
 			
 		}catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
-		return user;
+		return userList;
 	}
 
 	@Override //TESTED 

@@ -95,34 +95,26 @@ public class ProjectUtil implements InterUtil {
 		return randomNumber;
 		
 	}
-
 	
-	//This catches InputMismatchException for menu selection screen
-//	@Override
-//	public int inputLoop(Scanner input) {
-//		
-//		int inputNum = 0;
-//		boolean loop = true;
-//		
-//		 while (loop) {
-//	    	
-//	        if (input.hasNextInt()) {
-//	        	
-//	        	System.out.print("Input: ");
-//	            inputNum = sc.nextInt();
-//	        
-//	        } else {
-//	        	
-//	        	System.out.println(Janus.welcomeOops());
-//	        	System.out.print("Input: ");
-//	            sc.next();
-//	            continue;
-//	            
-//	        }
-//	        loop = false;
-//		 }
-//		
-//		return inputNum;
-//	}
+	//This will update the amount of users there are for new primary key entries
+	public static int updateUserCount(int userCount) {
+		
+		userCount += 1;
+		return userCount;
+	}
+	
+	//This will update the amount of accounts there are for new primary key entries
+	public static int updateAccountCount(int accountCount) {
+		
+		accountCount += 1;
+		return accountCount;
+	}
+	
+	//This will update the amount of links for new link primary keys. This value will probably be higher than the others.
+	public static int updateLinkCount(int linkCount) {
+		
+		linkCount += 1;
+		return linkCount;
+	}
 	
 }

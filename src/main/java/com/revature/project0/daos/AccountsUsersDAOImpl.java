@@ -11,8 +11,8 @@ import com.revature.project0.models.AccountsUsers;
 
 public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 
-	@Override //NEED TO TEST
-	public int createAccountUserLink(AccountsUsers link) {
+	@Override //TESTED
+	public int createAccountsUsersLink(AccountsUsers link) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
@@ -42,7 +42,7 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 	}
 
 	@Override //NEED TO TEST
-	public AccountsUsers getAccountUserLinkById(int accountUserId) {
+	public AccountsUsers getAccountsUsersLinkById(int accountUserId) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		String query = "SELECT * FROM accounts_users WHERE accounts_users_id = ?";
@@ -68,7 +68,7 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 	}
 
 	@Override //NEED TO TEST
-	public ArrayList<AccountsUsers> getAccountUserByUserId(int userId) {
+	public ArrayList<AccountsUsers> getAccountsUsersByUserId(int userId) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		ArrayList<AccountsUsers> links = new ArrayList<AccountsUsers>();
@@ -95,7 +95,7 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 	}
 
 	@Override //NEED TO TEST
-	public void deleteAccountUserById(int linkId) {
+	public void deleteAccountsUsersById(int linkId) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		String query = "DELETE FROM accounts_users WHERE accounts_users_id = ?";

@@ -6,7 +6,7 @@ import com.revature.project0.models.Account;
 
 public interface AccountDAO {
 
-	public int createAccount(Account newAccount);
+	public int createAccount(Account newAccount); // insert a new account into accounts table
 	
 	public Account getAccountById(int accountId);
 	
@@ -14,7 +14,7 @@ public interface AccountDAO {
 	
 	public ArrayList<Account> getAllAccounts();
 	
-	public ArrayList<Account> getAccountsByStatus(String status);
+	public ArrayList<Account> getAccountsByStatus(int statusId);
 
 	public void updateAccount(Account currentAccount);
 	

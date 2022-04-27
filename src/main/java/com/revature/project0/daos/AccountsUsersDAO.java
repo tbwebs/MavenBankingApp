@@ -6,12 +6,12 @@ import com.revature.project0.models.AccountsUsers;
 
 public interface AccountsUsersDAO {
 
-	public int createAccountUserLink(AccountsUsers link);
+	public int createAccountsUsersLink(AccountsUsers link);
 	
-	public AccountsUsers getAccountUserLinkById(int accountUserId);
+	public AccountsUsers getAccountsUsersLinkById(int accountUserId);
 	
-	public ArrayList<AccountsUsers> getAccountUserByUserId(int userId);
+	public ArrayList<AccountsUsers> getAccountsUsersByUserId(int userId);
 	
-	public void deleteAccountUserById(int linkId);
+	public void deleteAccountsUsersById(int linkId);
 	
 }

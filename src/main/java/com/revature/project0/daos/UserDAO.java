@@ -13,7 +13,7 @@ public interface UserDAO {
 	
 	public User getUserByUsername(String username);
 	
-	public User getUserByAccountId(int accountId);
+	public ArrayList<User> getUsersByAccountId(int accountId);
 	
 	public ArrayList<User> getAllUsers();
 	

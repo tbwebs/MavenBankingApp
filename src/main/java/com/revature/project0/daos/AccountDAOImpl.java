@@ -144,16 +144,16 @@ public class AccountDAOImpl implements AccountDAO {
 		
 	}
 
-	@Override //NEED TO TEST
-	public ArrayList<Account> getAccountsByStatus(String status) {
+	@Override //TESTED
+	public ArrayList<Account> getAccountsByStatus(int statusId) {
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
-		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE account_status.account_status = ?";
+		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_status_id = ? ORDER BY accounts.account_id ASC";
 		
 		try {
 			
 			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setString(1, status);
+			pst.setInt(1, statusId);
 			ResultSet rs = pst.executeQuery();
 			
 			while (rs.next()) {
@@ -179,7 +179,7 @@ public class AccountDAOImpl implements AccountDAO {
 	public ArrayList<Account> getAccountsbyUserId(int userId) {
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
-		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_id = accounts.account_id INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.user_id = ? ORDER BY ASC";
+		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_id = accounts.account_id INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.user_id = ? ORDER BY accounts.account_id ASC";
 		
 		try {
 			
