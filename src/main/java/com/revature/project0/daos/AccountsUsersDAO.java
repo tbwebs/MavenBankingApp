@@ -8,9 +8,7 @@ public interface AccountsUsersDAO {
 
 	public int createAccountsUsersLink(AccountsUsers link);
 	
-	public AccountsUsers getAccountsUsersLinkById(int accountUserId);
-	
-	public ArrayList<AccountsUsers> getAccountsUsersByUserId(int userId);
+	public AccountsUsers getAccountsUsersLinkById(int accountsUsersId);
 	
 	public void deleteAccountsUsersById(int linkId);
 	

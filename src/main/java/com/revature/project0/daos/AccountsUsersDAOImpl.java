@@ -41,8 +41,8 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 		return creationId;
 	}
 
-	@Override //NEED TO TEST
-	public AccountsUsers getAccountsUsersLinkById(int accountUserId) {
+	@Override //TESTED
+	public AccountsUsers getAccountsUsersLinkById(int accountsUsersId) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		String query = "SELECT * FROM accounts_users WHERE accounts_users_id = ?";
@@ -50,7 +50,7 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 		
 		try {
 			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setInt(1, accountUserId);
+			pst.setInt(1, accountsUsersId);
 			ResultSet rs = pst.executeQuery();
 			
 			if (rs.next()) {
@@ -67,34 +67,8 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 		return link;
 	}
 
-	@Override //NEED TO TEST
-	public ArrayList<AccountsUsers> getAccountsUsersByUserId(int userId) {
-		
-		Connection conn = ConnectionManager.getConnection();
-		ArrayList<AccountsUsers> links = new ArrayList<AccountsUsers>();
-		String query = "SELECT * FROM accounts_users WHERE accounts_users_id = ?";
-		
-		try {
-			
-			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setInt(1, userId);
-			ResultSet rs = pst.executeQuery();
-			
-			while (rs.next()) {
-				links.add(new AccountsUsers(
-						rs.getInt(1),
-						rs.getInt(2),
-						rs.getInt(3)));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return links;
-	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void deleteAccountsUsersById(int linkId) {
 		
 		Connection conn = ConnectionManager.getConnection();

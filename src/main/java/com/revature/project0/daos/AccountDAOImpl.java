@@ -175,7 +175,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	//I don't really know if I need this method or not
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public ArrayList<Account> getAccountsbyUserId(int userId) {
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();

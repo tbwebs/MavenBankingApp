@@ -57,15 +57,6 @@ public class Driver {
 		AccountsUsers account2jointlink = new AccountsUsers(2, victorTest.getUserId(), account2.getAccountId());
 		AccountsUsers account2jointlink1 = new AccountsUsers(3, treyTest.getUserId(), account2.getAccountId());
 		
-		ArrayList<User> userList = userDAO.getUsersByAccountId(2);
-		
-		for (User i : userList) {
-			System.out.println(i);
-		}
-
-	
-
-		
 		
 	}
 }
