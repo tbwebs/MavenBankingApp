@@ -13,7 +13,7 @@ public class StatusDAOImpl implements StatusDAO {
 	
 	private Connection conn = ConnectionManager.getConnection();
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public ArrayList<Status> getAllStatuses() {
 		
 		ArrayList<Status> statusList = new ArrayList<Status>();
@@ -39,7 +39,7 @@ public class StatusDAOImpl implements StatusDAO {
 		return statusList;
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void createStatus(Status status) {
 		
 		String query = "INSERT INTO account_status(account_status) VALUES (?)";

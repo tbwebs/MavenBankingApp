@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			//generating the keys allow's me to create a primary key column for the referenced foreign keys for the user_role table
 			//<https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#RETURN_GENERATED_KEYS>
-			//also should mention I referenced another revature's student code to figure out how to do this with SQL statements. Thanks Ryan!
+			//also I should mention I referenced another revature student's code to figure out how to do this with SQL statements. Thanks Ryan!
 			//<https://github.com/RyanEllingson/maven-banking-app/blob/master/src/main/java/dao/BankDAOImpl.java>
 			PreparedStatement pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, newUser.getFirstName());
@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			e.printStackTrace();
 		}
-		//still need to think about how I can use this. probably store in a hashmap for securing passwords?
+		//still need to think about how I can use this
 		return creationId;
 	}
 
@@ -110,10 +110,33 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
-	@Override
+	@Override //NEED TO TEST
 	public User getUserByAccountId(int accountId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		User user = new User();
+		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.password, user_role.user_role_id, user_role.user_role FROM accounts_users INNER JOIN users ON accounts_users.user_id = users.user_id INNER JOIN user_role ON users.user_role_id ON user_role.user_role_id WHERE accounts_users.account_id = ?";
+		
+		try {
+			
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setInt(1, accountId);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				user.setUserId(rs.getInt(1));
+				user.setFirstName(rs.getString(2));
+				user.setLastName(rs.getString(3));
+				user.setUsername(rs.getString(4));
+				user.setEamil(rs.getString(5));
+				user.setPassword(rs.getString(6));
+				user.setRole(new Role(rs.getInt(7), rs.getString(8)));
+				
+			}
+			
+		}catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override //TESTED 

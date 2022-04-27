@@ -164,16 +164,37 @@ public class AccountDAOImpl implements AccountDAO {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
-		
+		}		
 		return accountList;
 	}
 
 	//I don't really know if I need this method or not
-	@Override
+	@Override //NEED TO TEST
 	public ArrayList<Account> getAccountsbyUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<Account> accountList = new ArrayList<Account>();
+		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_id = accounts.account_id INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.user_id = ? ORDER BY ASC";
+		
+		try {
+			
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setInt(1, userId);
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				
+				accountList.add(new Account(
+						rs.getInt(1),
+						rs.getDouble(4),
+						new Type(rs.getInt(5), rs.getString(6)),
+						new Status(rs.getInt(7), rs.getString(8))));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return accountList;
 	}
 	
 	//TODO add a get account by "joint" type

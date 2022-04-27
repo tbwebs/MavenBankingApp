@@ -1,5 +1,7 @@
 package com.revature.project0.daos;
 
+import java.util.ArrayList;
+
 import com.revature.project0.models.AccountsUsers;
 
 public interface AccountsUsersDAO {
@@ -8,11 +10,7 @@ public interface AccountsUsersDAO {
 	
 	public AccountsUsers getAccountUserLinkById(int accountUserId);
 	
-	public int getAccountUserByBothIds(int accountId, int userId);
-	
-	public AccountsUsers getAccountUserByUser(int userId);
-	
-	public AccountsUsers getAccountUserByAccoutNum(int accountId);
+	public ArrayList<AccountsUsers> getAccountUserByUserId(int userId);
 	
 	public void deleteAccountUserById(int linkId);
 	

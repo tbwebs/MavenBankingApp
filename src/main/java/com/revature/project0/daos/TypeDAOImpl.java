@@ -14,7 +14,7 @@ public class TypeDAOImpl implements TypeDAO{
 
 	private Connection conn = ConnectionManager.getConnection();
 	
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public ArrayList<Type> getAllTypes() {
 		
 		ArrayList<Type> typeList = new ArrayList<Type>();
@@ -41,7 +41,7 @@ public class TypeDAOImpl implements TypeDAO{
 
 	}
 
-	@Override //NEED TO TEST
+	@Override //TESTED
 	public void createType(Type type) {
 		
 		String query = "INSERT INTO account_type(account_type) VALUES (?)";
