@@ -108,5 +108,35 @@ public class Janus {
 		
 		return menu;
 	}
+	
+	public static String transDepositOops() {
+		
+		String menu = "Oh you silly human... That was an invalid input because negative amount deposits would be a withdrawal.";
+			
+		return menu;
+	}
+	
+	public static String transWithdrawalOops() {
+		
+		String menu = "I see what your doing here... a negative withdrawal would be a deposit and we're supposed to be withdrawing now.";
+		
+		return menu;
+	}
+	
+	public static String transOverdraft() {
+		
+		String menu = "Check your math or watch your spending, you don't have enough funds. Programmers words I swear, Janus would never be that rude.";
+		
+		return menu;
+	}
+	
+	public static String transTransferOops() {
+		
+		String menu = "So I'm not going to transfer no money between accounts... I don't understand human currency but mathematically that doesn't seem efficient.";
+		
+		return menu;
+	}
+	
+	
 
 }

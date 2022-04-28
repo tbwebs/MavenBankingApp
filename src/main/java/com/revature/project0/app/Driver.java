@@ -28,6 +28,7 @@ public class Driver {
 		StatusDAOImpl statusDAO = new StatusDAOImpl();
 		AccountDAOImpl accountDAO = new AccountDAOImpl();
 		AccountsUsersDAOImpl linkDAO = new AccountsUsersDAOImpl();
+		ProjectUtil utility = new ProjectUtil();
 		
 		Role customer = new Role(1, "customer");
 		Role employee = new Role(2, "employee");
@@ -44,11 +45,11 @@ public class Driver {
 		User victorTest = new User(2, "TEST vic", "griffin", "vg@gmail.com", "vpass", customer);
 		User treyTest = new User(3, "TEST trey", "web", "tb@gmail.com", "tpass", customer);
 	
-		long acctNum = ProjectUtil.generateAccountNumber();
-		long routNum = ProjectUtil.generateRoutingNumber();
+		long acctNum = utility.generateAccountNumber();
+		long routNum = utility.generateRoutingNumber();
 		
-		long acctNum1 = ProjectUtil.generateAccountNumber();
-		long routNum1 = ProjectUtil.generateRoutingNumber();
+		long acctNum1 = utility.generateAccountNumber();
+		long routNum1 = utility.generateRoutingNumber();
 		
 		Account account1 = new Account(1, acctNum, routNum, 100.00, personal, pending);
 		Account account2 = new Account(2, acctNum1, routNum1, 22, joint , open);

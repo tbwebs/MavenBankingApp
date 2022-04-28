@@ -73,7 +73,7 @@ public class ProjectUtil implements InterUtil {
 		return null;
 	}
 	
-	public static long generateAccountNumber() {
+	public long generateAccountNumber() {
 		
 		int min = 1;
 		long max = 10000000000000000L;
@@ -85,7 +85,7 @@ public class ProjectUtil implements InterUtil {
 	
 	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
 	// 9 digits
-	public static long generateRoutingNumber() {
+	public long generateRoutingNumber() {
 		
 		int min = 1;
 		long max = 100000000L;
@@ -97,7 +97,7 @@ public class ProjectUtil implements InterUtil {
 	}
 	
 	//This will update the amount of users there are for new primary key entries
-	public static int updateUserCount(int userCount) {
+	public int updateUserCount(int userCount) {
 		
 		userCount += 1;
 		return userCount;
@@ -115,6 +115,12 @@ public class ProjectUtil implements InterUtil {
 		
 		linkCount += 1;
 		return linkCount;
+	}
+
+	@Override
+	public void menuLoop() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
