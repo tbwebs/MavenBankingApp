@@ -20,10 +20,35 @@ public class AppTest
 	
 	
 	@Test
-	public void testValidInts() {
+	public void testValidMenus() {
 		
-		//will have to check new input methods with new loops
+//		assertEquals(pUtil.validWelcomeMenuInput(), 0);
+//		assertEquals(pUtil.validWelcomeMenuInput(), 1);
+//		assertEquals(pUtil.validWelcomeMenuInput(), 2);
 		
+//		assertEquals(pUtil.validCustomerMenuInput(), 0);
+//		assertEquals(pUtil.validCustomerMenuInput(), 1);
+//		assertEquals(pUtil.validCustomerMenuInput(), 2);
+//		assertEquals(pUtil.validCustomerMenuInput(), 3);
+//		assertEquals(pUtil.validCustomerMenuInput(), 4);
+//		assertEquals(pUtil.validCustomerMenuInput(), 5);
+		
+//		assertEquals(pUtil.validEmployeeMenuInput(), 0);
+//		assertEquals(pUtil.validEmployeeMenuInput(), 1);
+//		assertEquals(pUtil.validEmployeeMenuInput(), 2);
+//		assertEquals(pUtil.validEmployeeMenuInput(), 3);
+//		assertEquals(pUtil.validEmployeeMenuInput(), 4);
+//
+//		assertEquals(pUtil.validAdminMenuInput(), 0);
+//		assertEquals(pUtil.validAdminMenuInput(), 1);
+//		assertEquals(pUtil.validAdminMenuInput(), 2);
+//		assertEquals(pUtil.validAdminMenuInput(), 3);
+//		assertEquals(pUtil.validAdminMenuInput(), 4);
+//		assertEquals(pUtil.validAdminMenuInput(), 5);
+//		assertEquals(pUtil.validAdminMenuInput(), 6);
+//		assertEquals(pUtil.validAdminMenuInput(), 7);
+//		assertEquals(pUtil.validAdminMenuInput(), 8);
+
 	}
 	
 	@Test

@@ -7,15 +7,6 @@ import com.revature.project0.models.User;
 
 //Where all my helper methods are
 public class ProjectUtil implements InterUtil {
-	
-	Scanner sc = new Scanner(System.in);
-
-	//This method needs to go in the DAO, or wherever the users are stored
-	@Override
-	public String checkForSameUsername(String Username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public User login() {
@@ -94,28 +85,172 @@ public class ProjectUtil implements InterUtil {
 		return null;
 	}
 
+	/*
+	 * The following 4 methods will be menu loops to validate input from human
+	 * Return 0 for "exit" keyword, otherwise need to return appropriate menu number.
+	 * Loops if there isn't a valid input (alpha characters, negative numbers, etc.
+	 * https://kodejava.org/how-do-i-validate-input-when-using-scanner/#:~:text=To%20validate%20input%20the%20Scanner,provide%20a%20positive%20integer%20number.
+	 * */
 	@Override
 	public int validWelcomeMenuInput() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Scanner sc = new Scanner(System.in);
+		int numInput;
+		
+		do {
+			
+			System.out.print(Janus.welcomeMenu());
+			
+			while (!sc.hasNextInt()) {
+				
+				String input = sc.next();
+				System.out.println(Janus.welcomeOops());
+				System.out.print(Janus.welcomeMenu());
+			}
+			
+			numInput = sc.nextInt();
+			
+			if (numInput > 2) {
+				
+				System.out.println(Janus.welcomeOops());
+				
+			} else if (numInput < 0) {
+				
+				System.out.println(Janus.welcomeOops());
+				
+			} else {
+				
+				continue;
+			}
+			
+		} while (numInput < 0|| numInput > 2);
+		
+		return numInput;
+		
 	}
 
 	@Override
 	public int validCustomerMenuInput() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Scanner sc = new Scanner(System.in);
+		int numInput;
+		
+		do {
+			
+			System.out.print(Janus.customerMenu());
+			
+			while (!sc.hasNextInt()) {
+				
+				String input = sc.next();
+				System.out.println(Janus.customerOops());
+				System.out.print(Janus.customerMenu());
+			}
+			
+			numInput = sc.nextInt();
+			
+			if (numInput > 6) {
+				
+				System.out.println(Janus.customerOops());
+				
+			} else if (numInput < 0) {
+				
+				System.out.println(Janus.customerOops());
+				
+			} else {
+				
+				continue;
+			}
+			
+		} while (numInput < 0|| numInput > 6);
+		
+		return numInput;
 	}
 
 	@Override
 	public int validEmployeeMenuInput() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Scanner sc = new Scanner(System.in);
+		int numInput;
+		
+		do {
+			
+			System.out.print(Janus.employeeMenu());
+			
+			while (!sc.hasNextInt()) {
+				
+				String input = sc.next();
+				System.out.println(Janus.employeeOops());
+				System.out.print(Janus.employeeMenu());
+			}
+			
+			numInput = sc.nextInt();
+			
+			if (numInput > 4) {
+				
+				System.out.println(Janus.employeeOops());
+				
+			} else if (numInput < 0) {
+				
+				System.out.println(Janus.employeeOops());
+				
+			} else {
+				
+				continue;
+			}
+			
+		} while (numInput < 0|| numInput > 4);
+		
+		return numInput;
+
 	}
 
 	@Override
 	public int validAdminMenuInput() {
+		
+		Scanner sc = new Scanner(System.in);
+		int numInput;
+		
+		do {
+			
+			System.out.print(Janus.adminMenu());
+			
+			while (!sc.hasNextInt()) {
+				
+				String input = sc.next();
+				System.out.println(Janus.adminOops());
+				System.out.print(Janus.adminMenu());
+			}
+			
+			numInput = sc.nextInt();
+			
+			if (numInput > 8) {
+				
+				System.out.println(Janus.adminOops());
+				
+			} else if (numInput < 0) {
+				
+				System.out.println(Janus.adminOops());
+				
+			} else {
+				
+				continue;
+			}
+			
+		} while (numInput < 0|| numInput > 8);
+		
+		return numInput;
+	}
+	
+	@Override
+	public String checkForSameUsername(String[] usernameList) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
+	}
+
+	@Override
+	public boolean checkUsernamePassword(User[] usersList) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

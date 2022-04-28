@@ -3,11 +3,17 @@ package com.revature.project0.utilclasses;
 // This is the class that will hold all menu selections and interact with the user on the console
 public class Janus {
 	
-	public static String welcomeMenu() {
+	public static String janusGreeting() {
 		
 		String menu = new String("Welcome human! My name is Janus, your digital assistant here at Revature Financial!\n\n"
-				+ "If you're here by mistake enter \"exit\", but I'd prefer you enter a number to get started:\n\n"
-				+ "1 : Log In\n"
+				+ "At anytime you can enter \"0\" to go back a menu, or if your here you'll exit the application:\n\n");
+		
+		return menu;
+	}
+	
+	public static String welcomeMenu() {
+		
+		String menu = new String("1 : Log In\n"
 				+ "2 : Register\n"
 				+ "Input: ");
 		
@@ -21,40 +27,40 @@ public class Janus {
 		return menu;
 	}
 	
-	public static String customerGreeting(String customerName) {
+	public static String customerGreeting() {
 		
-		String menu = new String("Greetings " + customerName + ", Janus here! Consider your options below and don't try to outsmart me with those pesky alphebetical characters:\n\n");
+		String menu = new String("Greetings human, it's Janus again! Consider your options below and don't try to outsmart me with those pesky alphebetical characters:\n\n");
 		
 		return menu;
 	}
 	
-	public static String customerMenu(String customerName) {
+	public static String customerMenu() {
 		
 		String menu = new String("1 : View Account(s)\n"
-				+ "1 : Deposit\n"
-				+ "2 : Withdraw\n"
-				+ "3 : Transfer\n"
-				+ "4 : Open New Account"
-				+ "5 : Change Personal Information"
-				+ "6 : Log Out\n");
+				+ "2 : Deposit\n"
+				+ "3 : Withdraw\n"
+				+ "4 : Transfer\n"
+				+ "5 : Open New Account\n"
+				+ "6 : Change Personal Information\n"
+				+ "Input: ");
 		
 		return menu;
 	}
 	
-	public static String employeeGreeting(String employeeName) {
+	public static String employeeGreeting() {
 		
-		String menu = new String("Hey " + employeeName + ", it's hard out here for a machine isn't it? Anyway...\n\n");
+		String menu = new String("Hey fellow employee, it's hard out here for a machine isn't it? Anyway...\n\n");
 		
 		return menu;
 	}
 	
-	public static String employeeMenu(String employeeName) {
+	public static String employeeMenu() {
 		
 		String menu = new String("1 : Lookup Customer\n"
-				+ "1 : Lookup Account\n"
-				+ "2 : View Account Applications"
-				+ "3 : Change Personal Information"
-				+ "4 : Log Out\n");
+				+ "2 : Lookup Account\n"
+				+ "3 : View Account Applications\n"
+				+ "4 : Change Personal Information\n"
+				+ "Input: ");
 		
 		return menu;
 	}
@@ -69,49 +75,50 @@ public class Janus {
 	public static String adminMenu() {
 		
 		String menu = new String("1 : Lookup Customer\n"
-				+ "1 : Lookup Account\n"
-				+ "2 : View Account Applications"
-				+ "3 : Deposit"
-				+ "4 : Withdraw"
-				+ "5 : Transfer"
-				+ "6 : Cancel Account"
-				+ "7 : Change Personal Info"
-				+ "8 : Log Out");
+				+ "2 : Lookup Account\n"
+				+ "3 : View Account Applications\n"
+				+ "4 : Deposit\n"
+				+ "5 : Withdraw\n"
+				+ "6 : Transfer\n"
+				+ "7 : Cancel Account\n"
+				+ "8 : Change Personal Information\n"
+				+ "Input: ");
 		
 		return menu;
 	}
 	
 	public static String usernameNotice() {
 		
-		String menu = new String("Got an original, funny username? That's too bad because I really like making them. Consider it a courtesy.");
+		String menu = new String("You have an original, funny username in mind? That's too bad because I really like making them. Consider it a courtesy.\n\n"
+				+ "Otherwwise fill out the information as it's asked to you below:");
 		
 		return menu;
 	}
 	
 	public static String welcomeOops() {
 		
-		String menu = "You must be one of those difficult humans...";
+		String menu = "\nYou must be one of those difficult humans. Try again...\n";
 		
 		return menu;
 	}
 	
 	public static String customerOops() {
 		
-		String menu = new String("I told you, we work in numbers around here. You wanna try again?");
+		String menu = new String("\nI told you, we work in very specific numbers around here. You wanna try again?\n");
 		
 		return menu;
 	}
 	
 	public static String employeeOops() {
 		
-		String menu = new String("Look I know I'm clever and all but there's only one of me around here. The least you could do is speak my language...");
+		String menu = new String("\nLook, I know I'm clever and all but there's only one of me around here. The least you could do is speak my language...\n");
 		
 		return menu;
 	}
 	
 	public static String adminOops() {
 		
-		String menu = new String("In order for me to translate that I'm gonna need a raise...");
+		String menu = new String("\nIn order for me to translate that I'm gonna need a raise...\n");
 		
 		return menu;
 	}

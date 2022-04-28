@@ -8,24 +8,16 @@ import com.revature.project0.models.User;
 
 public interface InterUtil {
 	
-	//Use the DAO method "get all usernames" for this one and just see if it contains the newly created username
-	String checkForSameUsername(String Username);
-	
-	/*
-	 * The following 4 methods will be menu loops to validate input from human
-	 * Needs to check for "exit" keyword, and return the appropriate int value.
-	 * Loops if there isn't a valid input (alpha characters, negative numbers, etc.
-	 * https://kodejava.org/how-do-i-validate-input-when-using-scanner/#:~:text=To%20validate%20input%20the%20Scanner,provide%20a%20positive%20integer%20number.
-	 * */
+	//validates menu input
 	int validWelcomeMenuInput();
 	
-	//checks if value is in range for customer menu
+	//validates menu input
 	int validCustomerMenuInput();
 	
-	//checks if value is in range for employee menu
+	//validates menu input
 	int validEmployeeMenuInput();
 	
-	//checks if value is in range for admin menu
+	//validates menu input
 	int validAdminMenuInput();
 	
 	//for account model 
@@ -42,5 +34,9 @@ public interface InterUtil {
 	
 	//shows general account info on login. Basically return the account toString method
 	String showAccountInfo(User userId);
+	
+	String checkForSameUsername(String[] usernameList);
+	
+	boolean checkUsernamePassword(User[] usersList);
 
 }

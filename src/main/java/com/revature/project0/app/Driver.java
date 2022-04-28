@@ -24,12 +24,12 @@ public class Driver {
 		
 	public static void main(String[] args) {
 
-		RoleDAOImpl roleDAO = new RoleDAOImpl();
-		UserDAOImpl userDAO = new UserDAOImpl();
-		TypeDAOImpl typeDAO = new TypeDAOImpl();
-		StatusDAOImpl statusDAO = new StatusDAOImpl();
-		AccountDAOImpl accountDAO = new AccountDAOImpl();
-		AccountsUsersDAOImpl linkDAO = new AccountsUsersDAOImpl();
+//		RoleDAOImpl roleDAO = new RoleDAOImpl();
+//		UserDAOImpl userDAO = new UserDAOImpl();
+//		TypeDAOImpl typeDAO = new TypeDAOImpl();
+//		StatusDAOImpl statusDAO = new StatusDAOImpl();
+//		AccountDAOImpl accountDAO = new AccountDAOImpl();
+//		AccountsUsersDAOImpl linkDAO = new AccountsUsersDAOImpl();
 		ProjectUtil utility = new ProjectUtil();
 //		
 //		Role customer = new Role(1, "customer");
@@ -60,6 +60,29 @@ public class Driver {
 //		AccountsUsers account2jointlink = new AccountsUsers(2, victorTest.getUserId(), account2.getAccountId());
 //		AccountsUsers account2jointlink1 = new AccountsUsers(3, treyTest.getUserId(), account2.getAccountId());
 		
+		System.out.println(Janus.janusGreeting());
 		
+		int menuInput = utility.validWelcomeMenuInput();
+		
+		User currentUser;
+		
+		switch (menuInput) {
+		
+		case 0:
+			System.out.print(Janus.farewell());
+			break;
+			
+		case 1:
+			
+			currentUser = utility.login();
+			
+		case 2:
+			
+			currentUser = utility.register();
+			
+		
+			
+		}
+
 	}
 }
