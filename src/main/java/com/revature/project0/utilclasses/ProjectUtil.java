@@ -61,15 +61,30 @@ public class ProjectUtil implements InterUtil {
 		}
 	}
 
+	//these methods may want to be in the driver class
 	@Override
 	public User login() {
-		// TODO Auto-generated method stub
+		/*
+		 * Step 1: Import scanner and get username/password
+		 * Step 2: Check for username/password in database
+		 * Step 3: if matches, show account info, and return user.
+		 * Step 4: if does not match, loop back to step 1.
+		 * */
 		return null;
 	}
-
+	
+	//Maybe think about employees/admins also having accounts. Shouldn't change logic that much just the menus and options
 	@Override
 	public User register() {
-		// TODO Auto-generated method stub
+		
+		/*
+		 * Step 1: Import Scanner
+		 * Step 2: Get first,last name, password, email, role
+		 * Step 3: Ask if it's a joint account, if so get same info for other person
+		 * Step 4: Ask for initial deposit, and add joint user with their account
+		 * Step 5: Tell them they don't have options until their account is approved, return user.
+		 * */
+		
 		return null;
 	}
 	
@@ -121,6 +136,12 @@ public class ProjectUtil implements InterUtil {
 	public void menuLoop() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String showAccountInfo(User userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

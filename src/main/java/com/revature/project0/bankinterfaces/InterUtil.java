@@ -37,6 +37,8 @@ public interface InterUtil {
 	
 	// need to figure out how to validate number inputs from user.
 	void menuLoop();
-
+	
+	//shows general account info on login. Basically return the account toString method
+	String showAccountInfo(User userId);
 
 }
