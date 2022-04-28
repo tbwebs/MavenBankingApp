@@ -22,14 +22,7 @@ public class AppTest
 	@Test
 	public void testValidInts() {
 		
-		assertEquals(pUtil.validWelcomeMenuInt(1), true);
-		assertEquals(pUtil.validWelcomeMenuInt(4), false);
-		assertEquals(pUtil.validCustomerMenuInt(5), true);
-		assertEquals(pUtil.validCustomerMenuInt(7), false);
-		assertEquals(pUtil.validEmployeeMenuInt(3), true);
-		assertEquals(pUtil.validEmployeeMenuInt(0), false);
-		assertEquals(pUtil.validAdminMenuInt(8), true);
-		assertEquals(pUtil.validAdminMenuInt(10), false);
+		//will have to check new input methods with new loops
 		
 	}
 	
@@ -57,5 +50,7 @@ public class AppTest
 		assertEquals(transTest.transfer(10.25, testAccount, testAccount2), 40.25, 0.001);
 		assertEquals(transTest.transfer(5, testAccount2, testAccount), 25, 0.001);
 	}
+	
+	
     
 }

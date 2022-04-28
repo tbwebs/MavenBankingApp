@@ -18,51 +18,6 @@ public class ProjectUtil implements InterUtil {
 	}
 
 	@Override
-	public boolean validWelcomeMenuInt(int menuInput) {
-		if (menuInput > 0 && menuInput < 3) {
-			return true;
-		} else {
-			
-			System.out.println(Janus.welcomeOops());
-			return false;
-		}
-	}
-
-	@Override
-	public boolean validCustomerMenuInt(int menuInput) {
-		if (menuInput > 0 && menuInput < 7) {
-			return true;
-		} else {
-			
-			System.out.println(Janus.customerOops());
-			return false;
-		}
-	}
-
-	@Override
-	public boolean validEmployeeMenuInt(int menuInput) {
-		if (menuInput > 0 && menuInput < 5) {
-			return true;
-		} else {
-			
-			System.out.println(Janus.employeeOops());
-			return false;
-		}
-	}
-
-	@Override
-	public boolean validAdminMenuInt(int menuInput) {
-		if (menuInput > 0 && menuInput < 9) {
-			return true;
-		} else {
-			
-			System.out.println(Janus.adminOops());
-			return false;
-		}
-	}
-
-	//these methods may want to be in the driver class
-	@Override
 	public User login() {
 		/*
 		 * Step 1: Import scanner and get username/password
@@ -132,16 +87,35 @@ public class ProjectUtil implements InterUtil {
 		return linkCount;
 	}
 
-	@Override
-	public void menuLoop() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public String showAccountInfo(User userId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int validWelcomeMenuInput() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int validCustomerMenuInput() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int validEmployeeMenuInput() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int validAdminMenuInput() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

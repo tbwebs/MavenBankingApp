@@ -14,6 +14,13 @@ public class Janus {
 		return menu;
 	}
 	
+	public static String farewell() {
+		
+		String menu = "Farewell human, come back soon!";
+		
+		return menu;
+	}
+	
 	public static String customerGreeting(String customerName) {
 		
 		String menu = new String("Greetings " + customerName + ", Janus here! Consider your options below and don't try to outsmart me with those pesky alphebetical characters:\n\n");
@@ -76,7 +83,7 @@ public class Janus {
 	
 	public static String usernameNotice() {
 		
-		String menu = new String("Got an original silly username? That's too bad because I really like making them for our customers. Consider it a courtesy.");
+		String menu = new String("Got an original, funny username? That's too bad because I really like making them. Consider it a courtesy.");
 		
 		return menu;
 	}
@@ -132,7 +139,7 @@ public class Janus {
 	
 	public static String transTransferOops() {
 		
-		String menu = "So I'm not going to transfer no money between accounts... I don't understand human currency but mathematically that doesn't seem efficient.";
+		String menu = "I don't understand human currency but mathematically that doesn't seem efficient, you should enter a positive or none zero amount.";
 		
 		return menu;
 	}
