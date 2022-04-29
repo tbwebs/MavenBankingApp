@@ -1,5 +1,7 @@
 package com.revature.project0.utilclasses;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.project0.bankinterfaces.InterUtil;
@@ -8,15 +10,25 @@ import com.revature.project0.models.User;
 //Where all my helper methods are
 public class ProjectUtil implements InterUtil {
 
-	@Override
-	public User login() {
-		/*
-		 * Step 1: Import scanner and get username/password
-		 * Step 2: Check for username/password in database
-		 * Step 3: if matches, show account info, and return user.
-		 * Step 4: if does not match, loop back to step 1.
-		 * */
-		return null;
+	@Override // just grab the info in the drive class in a loop so you can use the DAO methods
+	public ArrayList<String> login() {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		ArrayList<String> credentials = new ArrayList<String>();
+		String username;
+		String password;
+		
+		System.out.print("Enter your username: ");
+		username = sc.next();
+		
+		System.out.print("Enter your password: ");
+		password = sc.next();
+		
+		credentials.add(username);
+		credentials.add(password);
+		
+		return credentials;
 	}
 	
 	//Maybe think about employees/admins also having accounts. Shouldn't change logic that much just the menus and options
@@ -57,6 +69,15 @@ public class ProjectUtil implements InterUtil {
 		
 	}
 	
+	public int generateRandomNumber() {
+		
+		int min = 10;
+		int max = 99;
+		
+		int randomNumber = (int) Math.floor(Math.random()*(max-min+1)+min);
+		return randomNumber;
+	}
+	
 	//This will update the amount of users there are for new primary key entries
 	public int updateUserCount(int userCount) {
 		
@@ -80,10 +101,11 @@ public class ProjectUtil implements InterUtil {
 
 
 	@Override
-	public String showAccountInfo(User userId) {
-		// TODO Auto-generated method stub
+	public String showAccountInfo(User currentUser) {
+		
 		return null;
 	}
+	
 
 	/*
 	 * The following 4 methods will be menu loops to validate input from human
@@ -242,14 +264,25 @@ public class ProjectUtil implements InterUtil {
 	}
 	
 	@Override
-	public String checkForSameUsername(String[] usernameList) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean checkForSameUsername(ArrayList<String> usernameList, String username) {
+		
+		return usernameList.contains(username);
 	}
 
 	@Override
-	public boolean checkUsernamePassword(User[] usersList) {
-		// TODO Auto-generated method stub
+	public boolean checkUsernamePassword(ArrayList<User> usersList, String username, String password){
+		
+		for (User i : usersList) {
+			
+			if (i.getUsername().equals(username) && i.getPassword().equals(password)){
+				
+				return true;
+				
+			} else {
+				
+				return false;
+			}
+		}
 		return false;
 	}
 	

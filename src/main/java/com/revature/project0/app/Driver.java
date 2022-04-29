@@ -25,7 +25,7 @@ public class Driver {
 	public static void main(String[] args) {
 
 //		RoleDAOImpl roleDAO = new RoleDAOImpl();
-//		UserDAOImpl userDAO = new UserDAOImpl();
+		UserDAOImpl userDAO = new UserDAOImpl();
 //		TypeDAOImpl typeDAO = new TypeDAOImpl();
 //		StatusDAOImpl statusDAO = new StatusDAOImpl();
 //		AccountDAOImpl accountDAO = new AccountDAOImpl();
@@ -60,29 +60,111 @@ public class Driver {
 //		AccountsUsers account2jointlink = new AccountsUsers(2, victorTest.getUserId(), account2.getAccountId());
 //		AccountsUsers account2jointlink1 = new AccountsUsers(3, treyTest.getUserId(), account2.getAccountId());
 		
+		
+		Scanner sc = new Scanner(System.in);
+		
 		System.out.println(Janus.janusGreeting());
 		
-		int menuInput = utility.validWelcomeMenuInput();
-		
 		User currentUser;
+		ArrayList<Account> currentAccounts;
+		int userCount = 1;
+		int menuInput;
+			
+		menuInput = utility.validWelcomeMenuInput();
 		
 		switch (menuInput) {
-		
-		case 0:
-			System.out.print(Janus.farewell());
-			break;
-			
-		case 1:
-			
-			currentUser = utility.login();
-			
-		case 2:
-			
-			currentUser = utility.register();
-			
-		
+	
+			case 0:
+				
+				System.out.print(Janus.farewell());
+				break;
+				
+			case 1:
+				
+				ArrayList<User> users = userDAO.getAllUsers();
+				ArrayList<String> credentials;
+				
+				credentials = utility.login();
+				
+				break;
+	
+			case 2:
+				
+				String firstName;
+				String lastName;
+				String email;
+				String password;
+				int roleSelection;
+				String typeSelection;
+				
+				System.out.println(Janus.usernameNotice());
+				System.out.print("Enter your first name: ");
+				firstName = sc.next();
+				System.out.print("Enter your last name: ");
+				lastName = sc.next();
+				System.out.print("Enter your email: ");
+				email = sc.next();
+				System.out.print("Enter your password");
+				password = sc.next();
+				System.out.print("What is your role with Revature Financial?\n"
+						+ "1 : New customer\n"
+						+ "2 : New employee\n"
+						+ "3 : New admin\n"
+						+ "Input: ");
+				roleSelection = sc.nextInt();
+				
+				if (roleSelection == 1) {
+					
+					System.out.print("Is this a joint account? y/n\n"
+						+ "Input: ");
+					typeSelection = sc.next();
+					
+					switch (typeSelection) {
+					
+					case "y":
+						System.out.print("Enter additional customer's first name: ");
+						String secondFirstName = sc.next();
+						System.out.print("Enter additional customer's last name: ");
+						String secondLastName = sc.next();
+						System.out.print("Enter additional customer's email: ");
+						String secondEmail = sc.next();
+						System.out.print("Enter additional customer's password");
+						String secondPassword = sc.next();
+						
+						currentUser = new User(userCount, firstName, lastName, email, password, new Role(1, "customer"));
+						userCount = userDAO.createUser(currentUser);
+						User jointUser = new User(userCount, secondFirstName, secondLastName, secondEmail, secondPassword, new Role(1, "customer"));
+						userCount = userDAO.createUser(jointUser);
+						break;
+						
+					case "n":
+						currentUser = new User(userCount, firstName, lastName, email, password, new Role(1, "customer"));
+						userCount = userDAO.createUser(currentUser);
+						break;
+					}
+				
+				} else if (roleSelection == 2 ) {
+					
+					currentUser = new User(userCount, firstName, lastName, email, password, new Role(2, "employee"));
+					userCount = userDAO.createUser(currentUser);
+					
+				} else {
+					
+					currentUser = new User(userCount, firstName, lastName, email, password, new Role(3, "admin"));
+					userCount = userDAO.createUser(currentUser);
+				}
+				
+				System.out.print(Janus.initialDepositNotice());
+				double initialDeposit = sc.nextDouble();
+				
+				
+				
+				
+				break;
+
 			
 		}
-
+		
+		
 	}
 }

@@ -95,6 +95,19 @@ public class Janus {
 		return menu;
 	}
 	
+	public static String initialDepositNotice() {
+		
+		String menu = new String("Great work so far! To complete your registration you need to deposit an initial amount. After that, one of my associates will look at your application and if approved you will be able to perform transactions with your account.\n\n"
+				+ "How much will you deposit today?: ");
+		
+		return menu;
+	}
+	
+	public static String registrationCompleteNotice() {
+		
+		String menu = new String("Thank you for your registration! ");
+	}
+	
 	public static String welcomeOops() {
 		
 		String menu = "\nYou must be one of those difficult humans. Try again...\n";
@@ -151,6 +164,11 @@ public class Janus {
 		return menu;
 	}
 	
-	
+	public static String loginOops() {
+		
+		String menu = "I don't have you in our system with those credentials, try again...";
+		
+		return menu;
+	}
 
 }

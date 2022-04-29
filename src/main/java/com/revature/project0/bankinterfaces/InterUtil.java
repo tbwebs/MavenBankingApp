@@ -1,5 +1,9 @@
 package com.revature.project0.bankinterfaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.revature.project0.daos.UserDAOImpl;
 import com.revature.project0.models.User;
 
 /*
@@ -26,17 +30,21 @@ public interface InterUtil {
 	//for account model
 	long generateRoutingNumber();
 	
+	//for username creation
+	int generateRandomNumber();
+	
 	// this will login user on console, incorporate with loop somehow
-	User login();
+	ArrayList<String> login();
 	
 	// this will register user on console, incorporate with loop somehow
 	User register();
 	
 	//shows general account info on login. Basically return the account toString method
-	String showAccountInfo(User userId);
+	String showAccountInfo(User currentUser);
 	
-	String checkForSameUsername(String[] usernameList);
+	boolean checkForSameUsername(ArrayList<String> usernameList, String username);
 	
-	boolean checkUsernamePassword(User[] usersList);
+	boolean checkUsernamePassword(ArrayList<User> usersList, String username, String password);
+
 
 }

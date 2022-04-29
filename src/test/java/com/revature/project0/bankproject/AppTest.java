@@ -3,12 +3,17 @@ package com.revature.project0.bankproject;
 import org.junit.Test;
 
 import com.revature.project0.models.Account;
+import com.revature.project0.models.Role;
 import com.revature.project0.models.Status;
 import com.revature.project0.models.Type;
+import com.revature.project0.models.User;
 import com.revature.project0.utilclasses.ProjectUtil;
+import com.revature.project0.utilclasses.StringCleaner;
 import com.revature.project0.utilclasses.Transactions;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
 
 
 public class AppTest
@@ -17,6 +22,7 @@ public class AppTest
 	Transactions transTest = new Transactions();
 	Account testAccount = new Account(0, pUtil.generateAccountNumber(), pUtil.generateRoutingNumber(), 20.00, new Type(1, "personal"), new Status(1, "pending"));
 	Account testAccount2 = new Account(1, pUtil.generateAccountNumber(), pUtil.generateRoutingNumber(), 30.00, new Type(2, "joint"), new Status(2, "open"));
+	StringCleaner stringClean = new StringCleaner();
 	
 	
 	@Test
@@ -76,6 +82,31 @@ public class AppTest
 		assertEquals(transTest.transfer(5, testAccount2, testAccount), 25, 0.001);
 	}
 	
+	@Test
+	public void testUsernameCheck() {
+		
+		ArrayList<String> testUsernames = new ArrayList<String>();
+		testUsernames.add("victor.griffin");
+		testUsernames.add("chloe.griffith");
+		testUsernames.add("chloe.griffith1");
+		
+		assertEquals(false, pUtil.checkForSameUsername(testUsernames, "jimmy.fuller"));
+		assertEquals(true, pUtil.checkForSameUsername(testUsernames, "victor.griffin"));
+		assertEquals(false, pUtil.checkForSameUsername(testUsernames, "chloe.griffith11"));
+
+	}
+	
+	@Test
+	public void testUsernamePassword() {
+		
+		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(new User(1, "vic", "griff", "vg@gmail.com", "vpass", new Role(1, "customer")));
+		userList.add(new User(2, "clo", "griff", "cg@gmail.com", "cpass", new Role(2, "customer")));
+		
+		assertEquals(true, pUtil.checkUsernamePassword(userList, "vic.griff", "vpass"));
+		assertEquals(false, pUtil.checkUsernamePassword(userList, "clo.griff", "pass"));
+		assertEquals(false, pUtil.checkUsernamePassword(userList, "chloe.griff", "cpass"));
+	}
 	
     
 }

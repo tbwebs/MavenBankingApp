@@ -13,8 +13,17 @@ public class StringCleaner implements InterStringCleaner{
 
 	@Override
 	public String cleanUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	    char[] chars = username.toCharArray();
+	    String cleanUsername = "";
+	    
+	    for (int i = 0; i < chars.length; i++) {
+	    	  
+            if (!Character.isDigit(chars[i])) {
+                cleanUsername = cleanUsername + chars[i];
+            }
+        }
+		return cleanUsername;
 	}
 
 }
