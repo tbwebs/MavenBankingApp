@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setFirstName(rs.getString(2));
 				user.setLastName(rs.getString(3));
 				user.setUsername(rs.getString(4));
-				user.setEamil(rs.getString(5));
+				user.setEmail(rs.getString(5));
 				user.setPassword(rs.getString(6));
 				user.setRole(new Role(rs.getInt(7), rs.getString(8)));
 			}
@@ -97,7 +97,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setFirstName(rs.getString(2));
 				user.setLastName(rs.getString(3));
 				user.setUsername(rs.getString(4));
-				user.setEamil(rs.getString(5));
+				user.setEmail(rs.getString(5));
 				user.setPassword(rs.getString(6));
 				user.setRole(new Role(rs.getInt(7), rs.getString(8)));
 			}
@@ -127,6 +127,7 @@ public class UserDAOImpl implements UserDAO {
 						rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3),
+						rs.getString(4),
 						rs.getString(5),
 						rs.getString(6),
 						new Role(rs.getInt(7), rs.getString(8))));
@@ -156,6 +157,7 @@ public class UserDAOImpl implements UserDAO {
 						rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3),
+						rs.getString(4),
 						rs.getString(5),
 						rs.getString(6),
 						new Role(rs.getInt(7), rs.getString(8))));
@@ -234,5 +236,39 @@ public class UserDAOImpl implements UserDAO {
 		
 		return usernameList;
 	}
+
+	@Override
+	public boolean doesUserExist(String username, String password) {
+		
+		String query = "SELECT * FROM users WHERE username = ? AND pass_word = ?";
+		
+		try {
+			
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setString(1, username);
+			pst.setString(2, password);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			if (rs.next()) {
+				String resultUsername = rs.getString("username");
+				String resultPassword = rs.getString("pass_word");
+				
+				if(resultUsername.equals(username) && resultPassword.equals(password)) {
+					return true;
+				}
+				return false;
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	
 
 }

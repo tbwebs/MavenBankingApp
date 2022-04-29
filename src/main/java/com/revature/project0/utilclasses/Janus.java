@@ -87,25 +87,18 @@ public class Janus {
 		return menu;
 	}
 	
-	public static String usernameNotice() {
-		
-		String menu = new String("You have an original, funny username in mind? That's too bad because I really like making them. Consider it a courtesy.\n\n"
-				+ "Otherwwise fill out the information as it's asked to you below:");
-		
-		return menu;
-	}
-	
 	public static String initialDepositNotice() {
 		
 		String menu = new String("Great work so far! To complete your registration you need to deposit an initial amount. After that, one of my associates will look at your application and if approved you will be able to perform transactions with your account.\n\n"
-				+ "How much will you deposit today?: ");
+				+ "Please enter your initial deposit: ");
 		
 		return menu;
 	}
 	
 	public static String registrationCompleteNotice() {
 		
-		String menu = new String("Thank you for your registration! ");
+		String menu = new String("Thank you for registering with Revature Financial. Goodbye for now!");
+		return menu;
 	}
 	
 	public static String welcomeOops() {

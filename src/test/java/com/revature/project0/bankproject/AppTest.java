@@ -96,17 +96,7 @@ public class AppTest
 
 	}
 	
-	@Test
-	public void testUsernamePassword() {
-		
-		ArrayList<User> userList = new ArrayList<User>();
-		userList.add(new User(1, "vic", "griff", "vg@gmail.com", "vpass", new Role(1, "customer")));
-		userList.add(new User(2, "clo", "griff", "cg@gmail.com", "cpass", new Role(2, "customer")));
-		
-		assertEquals(true, pUtil.checkUsernamePassword(userList, "vic.griff", "vpass"));
-		assertEquals(false, pUtil.checkUsernamePassword(userList, "clo.griff", "pass"));
-		assertEquals(false, pUtil.checkUsernamePassword(userList, "chloe.griff", "cpass"));
-	}
+
 	
     
 }

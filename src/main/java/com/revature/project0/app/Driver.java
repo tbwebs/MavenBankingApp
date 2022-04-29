@@ -1,5 +1,6 @@
 package com.revature.project0.app;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,8 +29,8 @@ public class Driver {
 		UserDAOImpl userDAO = new UserDAOImpl();
 //		TypeDAOImpl typeDAO = new TypeDAOImpl();
 //		StatusDAOImpl statusDAO = new StatusDAOImpl();
-//		AccountDAOImpl accountDAO = new AccountDAOImpl();
-//		AccountsUsersDAOImpl linkDAO = new AccountsUsersDAOImpl();
+		AccountDAOImpl accountDAO = new AccountDAOImpl();
+		AccountsUsersDAOImpl linkDAO = new AccountsUsersDAOImpl();
 		ProjectUtil utility = new ProjectUtil();
 //		
 //		Role customer = new Role(1, "customer");
@@ -65,14 +66,22 @@ public class Driver {
 		
 		System.out.println(Janus.janusGreeting());
 		
-		User currentUser;
-		ArrayList<Account> currentAccounts;
-		int userCount = 1;
-		int menuInput;
-			
-		menuInput = utility.validWelcomeMenuInput();
+		int userCount = 0;
+		int accountCount = 0;
+		int linkCount = 0;
 		
-		switch (menuInput) {
+		int userId = 0;
+		
+		ArrayList<String> credentials;
+		
+		int menuSelection;
+		User currentUser;
+		Account newAccount;
+		ArrayList<User> userList = userDAO.getAllUsers();
+		
+		menuSelection = utility.validWelcomeMenuInput();
+		
+		switch (menuSelection) {
 	
 			case 0:
 				
@@ -81,89 +90,38 @@ public class Driver {
 				
 			case 1:
 				
-				ArrayList<User> users = userDAO.getAllUsers();
-				ArrayList<String> credentials;
-				
 				credentials = utility.login();
 				
-				break;
-	
-			case 2:
-				
-				String firstName;
-				String lastName;
-				String email;
-				String password;
-				int roleSelection;
-				String typeSelection;
-				
-				System.out.println(Janus.usernameNotice());
-				System.out.print("Enter your first name: ");
-				firstName = sc.next();
-				System.out.print("Enter your last name: ");
-				lastName = sc.next();
-				System.out.print("Enter your email: ");
-				email = sc.next();
-				System.out.print("Enter your password");
-				password = sc.next();
-				System.out.print("What is your role with Revature Financial?\n"
-						+ "1 : New customer\n"
-						+ "2 : New employee\n"
-						+ "3 : New admin\n"
-						+ "Input: ");
-				roleSelection = sc.nextInt();
-				
-				if (roleSelection == 1) {
+				if (userDAO.doesUserExist(credentials.get(0), credentials.get(1))) {
 					
-					System.out.print("Is this a joint account? y/n\n"
-						+ "Input: ");
-					typeSelection = sc.next();
+					currentUser = userDAO.getUserByUsername(credentials.get(0));
+				}
+				else {
 					
-					switch (typeSelection) {
-					
-					case "y":
-						System.out.print("Enter additional customer's first name: ");
-						String secondFirstName = sc.next();
-						System.out.print("Enter additional customer's last name: ");
-						String secondLastName = sc.next();
-						System.out.print("Enter additional customer's email: ");
-						String secondEmail = sc.next();
-						System.out.print("Enter additional customer's password");
-						String secondPassword = sc.next();
-						
-						currentUser = new User(userCount, firstName, lastName, email, password, new Role(1, "customer"));
-						userCount = userDAO.createUser(currentUser);
-						User jointUser = new User(userCount, secondFirstName, secondLastName, secondEmail, secondPassword, new Role(1, "customer"));
-						userCount = userDAO.createUser(jointUser);
-						break;
-						
-					case "n":
-						currentUser = new User(userCount, firstName, lastName, email, password, new Role(1, "customer"));
-						userCount = userDAO.createUser(currentUser);
-						break;
-					}
-				
-				} else if (roleSelection == 2 ) {
-					
-					currentUser = new User(userCount, firstName, lastName, email, password, new Role(2, "employee"));
-					userCount = userDAO.createUser(currentUser);
-					
-				} else {
-					
-					currentUser = new User(userCount, firstName, lastName, email, password, new Role(3, "admin"));
-					userCount = userDAO.createUser(currentUser);
+					System.out.println("The username/password was invalid. Try Again");
+					credentials = utility.login();
 				}
 				
-				System.out.print(Janus.initialDepositNotice());
-				double initialDeposit = sc.nextDouble();
+				break;
 				
+			case 2:
 				
+				currentUser = utility.registerUser(userCount);
+				userCount = userDAO.createUser(currentUser);
 				
+				newAccount = utility.registerAccount(accountCount, userCount);
+				accountCount = accountDAO.createAccount(newAccount);
 				
 				break;
 
+		
 			
 		}
+		
+		//check for role
+			// if customer need to create new account link
+		//show appropriate menu.
+		//loop through  options until user exits
 		
 		
 	}

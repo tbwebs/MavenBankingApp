@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.project0.daos.UserDAOImpl;
+import com.revature.project0.models.Account;
 import com.revature.project0.models.User;
 
 /*
@@ -11,6 +12,8 @@ import com.revature.project0.models.User;
  * */
 
 public interface InterUtil {
+	
+	ArrayList<String> login();
 	
 	//validates menu input
 	int validWelcomeMenuInput();
@@ -32,19 +35,16 @@ public interface InterUtil {
 	
 	//for username creation
 	int generateRandomNumber();
+
+	// creates new 
+	User registerUser(int userCount);
 	
-	// this will login user on console, incorporate with loop somehow
-	ArrayList<String> login();
-	
-	// this will register user on console, incorporate with loop somehow
-	User register();
+	Account registerAccount(int accountCount, int userCount);
 	
 	//shows general account info on login. Basically return the account toString method
 	String showAccountInfo(User currentUser);
 	
 	boolean checkForSameUsername(ArrayList<String> usernameList, String username);
-	
-	boolean checkUsernamePassword(ArrayList<User> usersList, String username, String password);
 
 
 }

@@ -9,11 +9,11 @@ public class User {
 	
 	public User() { super(); }
 	
-	public User(int userId, String firstName, String lastName, String email, String password, Role role) {
+	public User(int userId, String firstName, String lastName, String username, String email, String password, Role role) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.username = firstName + "." + lastName;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
@@ -63,7 +63,7 @@ public class User {
 		return this.email;
 	}
 	
-	public void setEamil(String newEmail) {
+	public void setEmail(String newEmail) {
 		this.email = newEmail;
 	}
 	

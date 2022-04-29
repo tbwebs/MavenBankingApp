@@ -1,29 +1,30 @@
 package com.revature.project0.utilclasses;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.revature.project0.bankinterfaces.InterUtil;
+import com.revature.project0.models.Account;
+import com.revature.project0.models.Role;
+import com.revature.project0.models.Status;
+import com.revature.project0.models.Type;
 import com.revature.project0.models.User;
 
 //Where all my helper methods are
 public class ProjectUtil implements InterUtil {
-
-	@Override // just grab the info in the drive class in a loop so you can use the DAO methods
+	
+	@Override
 	public ArrayList<String> login() {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		ArrayList<String> credentials = new ArrayList<String>();
-		String username;
-		String password;
-		
 		System.out.print("Enter your username: ");
-		username = sc.next();
+		String username = sc.next();
 		
 		System.out.print("Enter your password: ");
-		password = sc.next();
+		String password = sc.next();
+		
+		ArrayList<String> credentials = new ArrayList<String>();
 		
 		credentials.add(username);
 		credentials.add(password);
@@ -31,19 +32,124 @@ public class ProjectUtil implements InterUtil {
 		return credentials;
 	}
 	
-	//Maybe think about employees/admins also having accounts. Shouldn't change logic that much just the menus and options
 	@Override
-	public User register() {
+	public User registerUser(int userCount) {
 		
-		/*
-		 * Step 1: Import Scanner
-		 * Step 2: Get first,last name, password, email, role
-		 * Step 3: Ask if it's a joint account, if so get same info for other person
-		 * Step 4: Ask for initial deposit, and add joint user with their account
-		 * Step 5: Tell them they don't have options until their account is approved, return user.
-		 * */
+		User currentUser = new User();
+		Role currentRole = new Role();
+		String firstName;
+		String lastName;
+		String username;
+		String email;
+		String password;
+		int roleSelection;
 		
-		return null;
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			
+			System.out.print("Enter your first name: ");
+			firstName = sc.next();
+			System.out.print("Enter your last name: ");
+			lastName = sc.next();
+			System.out.print("Enter a username: ");
+			username = sc.next();
+			System.out.print("Enter your email: ");
+			email = sc.next();
+			System.out.print("Enter your password: ");
+			password = sc.next();
+			System.out.print("What is your role with Revature Financial?\n"
+					+ "1 : New customer\n"
+					+ "2 : New employee\n"
+					+ "3 : New admin\n"
+					+ "Input: ");
+			roleSelection = sc.nextInt();
+			
+			if (roleSelection == 1) {
+				
+				currentRole.setRoleId(1);
+				currentRole.setRole("customer");
+				
+			} else if (roleSelection == 2) {
+				
+				currentRole.setRoleId(2);
+				currentRole.setRole("employee");
+				
+			} else {
+				
+				currentRole.setRoleId(3);
+				currentRole.setRole("admin");
+			}
+			
+			currentUser.setUserId(userCount);
+			currentUser.setFirstName(firstName);
+			currentUser.setLastName(lastName);
+			currentUser.setUsername(username);
+			currentUser.setEmail(email);
+			currentUser.setPassword(password);
+			currentUser.setRole(currentRole);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return currentUser;
+	}
+
+	@Override
+	public Account registerAccount(int accountCount, int userCount) {
+		
+		Account currentAccount = new Account();
+		Type currentType = new Type();
+		Status pendingStatus = new Status(1, "pending");
+		long newAccountNum = this.generateAccountNumber();
+		long newRoutingNum = this.generateRoutingNumber();
+		double initialDeposit;
+		int typeSelection;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			
+			System.out.print("What kind of account do you want to open?\n"
+					+ "1 : personal\n"
+					+ "2 : joint\n"
+					+ "Input: ");
+			typeSelection = sc.nextInt();
+			
+			if (typeSelection == 1) {
+				
+				currentType.setTypeId(1);
+				currentType.setType("personal");
+				
+			} else {
+				
+				System.out.println("Please register the second account holder.");
+				User secondUser = this.registerUser(userCount);
+				currentType.setTypeId(2);
+				currentType.setType("joint");
+				
+			}
+			
+			System.out.print(Janus.initialDepositNotice());
+			
+			initialDeposit = sc.nextDouble();
+	
+			currentAccount.setAccountId(accountCount);
+			currentAccount.setAccountNumber(newAccountNum);
+			currentAccount.setRoutingNumber(newRoutingNum);
+			currentAccount.setBalance(initialDeposit);
+			currentAccount.setType(currentType);
+			currentAccount.setStatus(pendingStatus);
+			
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return currentAccount;
 	}
 	
 	public long generateAccountNumber() {
@@ -269,21 +375,5 @@ public class ProjectUtil implements InterUtil {
 		return usernameList.contains(username);
 	}
 
-	@Override
-	public boolean checkUsernamePassword(ArrayList<User> usersList, String username, String password){
-		
-		for (User i : usersList) {
-			
-			if (i.getUsername().equals(username) && i.getPassword().equals(password)){
-				
-				return true;
-				
-			} else {
-				
-				return false;
-			}
-		}
-		return false;
-	}
 	
 }

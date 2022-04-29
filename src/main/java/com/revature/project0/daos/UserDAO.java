@@ -23,5 +23,7 @@ public interface UserDAO {
 	
 	public void deleteUserById(int userId);
 	
+	//for login
+	public boolean doesUserExist(String username, String password);
 	
 }
