@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import com.revature.project0.models.Type;
 
 public class TypeDAOImpl implements TypeDAO{
-
-	private Connection conn = ConnectionManager.getConnection();
 	
 	@Override //TESTED
 	public ArrayList<Type> getAllTypes() {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Type> typeList = new ArrayList<Type>();
 		String query = "SELECT * FROM account_type";
@@ -43,6 +43,8 @@ public class TypeDAOImpl implements TypeDAO{
 
 	@Override //TESTED
 	public void createType(Type type) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		String query = "INSERT INTO account_type(account_type) VALUES (?)";
 		

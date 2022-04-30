@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import com.revature.project0.models.Status;
 
 public class StatusDAOImpl implements StatusDAO {
-	
-	private Connection conn = ConnectionManager.getConnection();
 
 	@Override //TESTED
 	public ArrayList<Status> getAllStatuses() {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Status> statusList = new ArrayList<Status>();
 		String query = "SELECT * FROM account_status";
@@ -41,6 +41,8 @@ public class StatusDAOImpl implements StatusDAO {
 
 	@Override //TESTED
 	public void createStatus(Status status) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		String query = "INSERT INTO account_status(account_status) VALUES (?)";
 			

@@ -45,6 +45,7 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 	public AccountsUsers getAccountsUsersLinkById(int accountsUsersId) {
 		
 		Connection conn = ConnectionManager.getConnection();
+		
 		String query = "SELECT * FROM accounts_users WHERE accounts_users_id = ?";
 		AccountsUsers link = new AccountsUsers();
 		
@@ -72,6 +73,7 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 	public void deleteAccountsUsersById(int linkId) {
 		
 		Connection conn = ConnectionManager.getConnection();
+		
 		String query = "DELETE FROM accounts_users WHERE accounts_users_id = ?";
 		
 		try {

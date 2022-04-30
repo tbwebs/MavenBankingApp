@@ -25,10 +25,10 @@ public class Driver {
 		
 	public static void main(String[] args) {
 
-//		RoleDAOImpl roleDAO = new RoleDAOImpl();
+		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		UserDAOImpl userDAO = new UserDAOImpl();
-//		TypeDAOImpl typeDAO = new TypeDAOImpl();
-//		StatusDAOImpl statusDAO = new StatusDAOImpl();
+		TypeDAOImpl typeDAO = new TypeDAOImpl();
+		StatusDAOImpl statusDAO = new StatusDAOImpl();
 		AccountDAOImpl accountDAO = new AccountDAOImpl();
 		AccountsUsersDAOImpl linkDAO = new AccountsUsersDAOImpl();
 		ProjectUtil utility = new ProjectUtil();
@@ -61,9 +61,6 @@ public class Driver {
 //		AccountsUsers account2jointlink = new AccountsUsers(2, victorTest.getUserId(), account2.getAccountId());
 //		AccountsUsers account2jointlink1 = new AccountsUsers(3, treyTest.getUserId(), account2.getAccountId());
 		
-		
-		Scanner sc = new Scanner(System.in);
-		
 		System.out.println(Janus.janusGreeting());
 		
 		int userCount = 0;
@@ -81,42 +78,35 @@ public class Driver {
 		
 		menuSelection = utility.validWelcomeMenuInput();
 		
-		switch (menuSelection) {
-	
-			case 0:
+		if (menuSelection == 0) {
+			
+			System.out.println(Janus.farewell());
+			
+		} else if (menuSelection == 1) {
+			
+			credentials = utility.login();
+			
+			if (userDAO.doesUserExist(credentials.get(0), credentials.get(1))) {
 				
-				System.out.print(Janus.farewell());
-				break;
+				currentUser = userDAO.getUserByUsername(credentials.get(0));
+			}
+			else {
 				
-			case 1:
-				
+				System.out.println("The username/password was invalid. Try Again");
 				credentials = utility.login();
-				
-				if (userDAO.doesUserExist(credentials.get(0), credentials.get(1))) {
-					
-					currentUser = userDAO.getUserByUsername(credentials.get(0));
-				}
-				else {
-					
-					System.out.println("The username/password was invalid. Try Again");
-					credentials = utility.login();
-				}
-				
-				break;
-				
-			case 2:
-				
-				currentUser = utility.registerUser(userCount);
-				userCount = userDAO.createUser(currentUser);
-				
-				newAccount = utility.registerAccount(accountCount, userCount);
-				accountCount = accountDAO.createAccount(newAccount);
-				
-				break;
-
+			}
 		
+		} else {
+		
+			currentUser = utility.registerUser(userCount);
+			userCount = userDAO.createUser(currentUser);
+			
+			newAccount = utility.registerAccount(accountCount, userCount);
+			accountCount = accountDAO.createAccount(newAccount);
 			
 		}
+		
+		
 		
 		//check for role
 			// if customer need to create new account link

@@ -12,11 +12,11 @@ import com.revature.project0.models.Status;
 import com.revature.project0.models.Type;
 
 public class AccountDAOImpl implements AccountDAO {
-	
-	private Connection conn = ConnectionManager.getConnection();
 
 	@Override //TESTED
 	public int createAccount(Account newAccount) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		int creationId = 0;
 		String query = "INSERT INTO accounts (account_num, routing_num, balance, account_type_id, account_status_id) VALUES (?, ?, ?, ?, ?)";
@@ -50,6 +50,8 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override //TESTED
 	public Account getAccountById(int accountId) {
 		
+		Connection conn = ConnectionManager.getConnection();
+		
 		Account account = new Account();
 		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_id = ?";
 		
@@ -78,6 +80,8 @@ public class AccountDAOImpl implements AccountDAO {
 
 	@Override //TESTED
 	public ArrayList<Account> getAllAccounts() {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
 		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id ORDER BY accounts.account_id ASC";
@@ -109,6 +113,8 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override //TESTED
 	public void updateAccount(Account currentAccount) {
 		
+		Connection conn = ConnectionManager.getConnection();
+		
 		String query = "UPDATE accounts SET balance = ?, account_type_id = ?, account_status_id = ? WHERE account_id = ?";
 		
 		try {
@@ -129,6 +135,8 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override //TESTED
 	public void deleteAccountById(int accountId) {
 		
+		Connection conn = ConnectionManager.getConnection();
+		
 		String query = "DELETE FROM accounts WHERE account_id = ?";
 		
 		try {
@@ -146,6 +154,8 @@ public class AccountDAOImpl implements AccountDAO {
 
 	@Override //TESTED
 	public ArrayList<Account> getAccountsByStatus(int statusId) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
 		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_status_id = ? ORDER BY accounts.account_id ASC";
@@ -177,6 +187,8 @@ public class AccountDAOImpl implements AccountDAO {
 	//I don't really know if I need this method or not
 	@Override //TESTED
 	public ArrayList<Account> getAccountsbyUserId(int userId) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
 		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_id = accounts.account_id INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.user_id = ? ORDER BY accounts.account_id ASC";

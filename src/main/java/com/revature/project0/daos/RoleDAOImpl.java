@@ -12,10 +12,10 @@ import com.revature.project0.models.Role;
 
 public class RoleDAOImpl implements RoleDAO {
 	
-	private Connection conn = ConnectionManager.getConnection();
-
 	@Override //TESTED
 	public ArrayList<Role> getAllRoles() {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Role> rolesList = new ArrayList<Role>();
 		String query = "SELECT * FROM user_role";
@@ -43,6 +43,8 @@ public class RoleDAOImpl implements RoleDAO {
 
 	@Override //TESTED
 	public void createRole(Role role) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		try {
 			

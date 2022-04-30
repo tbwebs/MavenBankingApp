@@ -11,11 +11,11 @@ import com.revature.project0.models.Role;
 import com.revature.project0.models.User;
 
 public class UserDAOImpl implements UserDAO {
-	
-	private Connection conn = ConnectionManager.getConnection();
 
 	@Override //TESTED
 	public int createUser(User newUser) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		String query = "INSERT INTO users(first_name, last_name, username, email, pass_word, user_role_id) VALUES (?, ?, ?, ?, ?, ?)";
 		int creationId = 0;
@@ -53,6 +53,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override //TESTED
 	public User getUserById(int userId) {
 		
+		Connection conn = ConnectionManager.getConnection();
+		
 		User user = new User();
 		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM users INNER JOIN user_role ON users.user_role_id = user_role.user_role_id WHERE users.user_id = ?";
 		
@@ -82,6 +84,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override //TESTED
 	public User getUserByUsername(String username) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		User user = new User();
 		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM users INNER JOIN user_role ON users.user_role_id = user_role.user_role_id WHERE users.username = ?";
@@ -113,6 +117,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override //TESTED
 	public ArrayList<User> getUsersByAccountId(int accountId) {
 		
+		Connection conn = ConnectionManager.getConnection();
+		
 		ArrayList<User> userList = new ArrayList<User>();
 		
 		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM accounts_users INNER JOIN users ON accounts_users.user_id = users.user_id INNER JOIN user_role ON users.user_role_id = user_role.user_role_id WHERE accounts_users.account_id = ?";
@@ -142,6 +148,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override //TESTED 
 	public ArrayList<User> getAllUsers() {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<User> userList = new ArrayList<User>();
 		String query = "SELECT users.user_id, users.first_name, users.last_name, users.username, users.email, users.pass_word, user_role.user_role_id, user_role.user_role FROM users INNER JOIN user_role ON users.user_role_id = user_role.user_role_id ORDER BY users.user_id ASC";
@@ -174,6 +182,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override //TESTED
 	public void updateUser(User currentUser) {
 		
+		Connection conn = ConnectionManager.getConnection();
+		
 		String query = "UPDATE users SET first_name = ?, last_name = ?, username = ?, email = ?, pass_word = ?, user_role_id = ? WHERE user_id = ?";
 		
 		try {
@@ -196,6 +206,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override //TESTED
 	public void deleteUserById(int userId) {
+		
+		Connection conn = ConnectionManager.getConnection();
 
 		String query = "DELETE FROM users WHERE user_id = ?";
 		
@@ -214,6 +226,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override //TESTED
 	public ArrayList<String> getAllUsernames() {
+		
+		Connection conn = ConnectionManager.getConnection();
 
 		ArrayList<String> usernameList = new ArrayList<String>();
 		
@@ -239,6 +253,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean doesUserExist(String username, String password) {
+		
+		Connection conn = ConnectionManager.getConnection();
 		
 		String query = "SELECT * FROM users WHERE username = ? AND pass_word = ?";
 		
