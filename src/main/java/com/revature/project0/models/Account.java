@@ -74,8 +74,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [accountId=" + accountId + ", accountNumber=" + accountNumber + ", routingNumber="
-				+ routingNumber + ", balance=" + balance + ", type=" + type + ", status=" + status + "]";
+		return "Account Number : " + accountNumber + "\nRouting Number : " + routingNumber + "\nBalance : $" + balance + "\nType : " + type.getType() + "\nStatus : " + status.getStatus();
 	}
 	
 }

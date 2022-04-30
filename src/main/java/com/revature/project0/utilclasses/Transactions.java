@@ -1,5 +1,7 @@
 package com.revature.project0.utilclasses;
 
+import java.util.Scanner;
+
 import com.revature.project0.bankinterfaces.InterTransactions;
 import com.revature.project0.models.Account;
 
@@ -8,52 +10,43 @@ import com.revature.project0.models.Account;
 public class Transactions implements InterTransactions {
 
 	@Override
-	public double deposit(double amount, Account account) {
+	public double deposit(Account account) {
 		
-		double accountBalance = account.getBalance();
 		double newBalance = 0;
 		
 		try {
-			if (amount < 0 || amount == 0) {
-				Janus.transDepositOops();
-				
-			} else {
-				
-				newBalance = accountBalance + amount;
-			}
-				
-		} catch(Exception e) {
+			
+			double accountBalance = account.getBalance();
+			
+			double amount = this.getAmount();
+
+			newBalance = accountBalance + amount;
+			
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		
 		return newBalance;
 	}
 
 	@Override
-	public double withdraw(double amount, Account account) {
+	public double withdraw(Account account) {
 		
 		double accountBalance = account.getBalance();
 		double newBalance = 0;
 		
 		try {
-			if (amount < 0 || amount == 0) {
+			
+			do {
 				
-				Janus.transWithdrawalOops();
-				
-			} else {
+				double amount = this.getAmount();
 				
 				newBalance = accountBalance - amount;
 				
-				if (newBalance < 0) {
-					
-					Janus.transOverdraft();
-					
-				} else {
-					
-					return newBalance;
-				}
-			}
+				if (newBalance < 0)
+					System.out.print(Janus.transOverdraft());
+				
+			} while (newBalance < 0);
 			
 		} catch (Exception e) {
 			
@@ -64,39 +57,61 @@ public class Transactions implements InterTransactions {
 	}
 
 	@Override
-	public double transfer(double amount, Account fromAccount, Account toAccount) {
+	public double transfer(Account fromAccount, Account toAccount) {
 		
 		double from = fromAccount.getBalance();
 		double reciever = toAccount.getBalance();
 		double difference = 0;
 		double sum = 0;
-		
+
 		try {
-			if (amount < 0 || amount == 0) {
+			
+			do {
 				
-				Janus.transTransferOops();
-				
-			} else {
+				double amount = this.getAmount();
 				
 				difference = from - amount;
+				sum = reciever + amount;
 				
-				if (difference < 0) {
-					
-					Janus.transOverdraft();
-					
-				} else {
-					
-					sum = reciever + amount;
-					
-				}
-			}
+				if (difference < 0)
+					System.out.print(Janus.transOverdraft());
+				
+			} while (difference < 0);
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		
 		return sum;
+
 	}
 
+	@Override
+	public double getAmount() {
+		
+
+		Scanner sc = new Scanner(System.in);
+		double amount;
+		
+		do {
+			
+			System.out.print("Enter an amount (i.e., 10.50): ");
+	
+			while(!sc.hasNextDouble()) {
+		
+				String input = sc.next();
+				System.out.print("Invalid input, please try again (i.e., 10.50): ");
+			}
+			
+			amount = sc.nextDouble();
+			
+			if (amount < 0) {
+				
+				System.out.println("Please enter a positve value greater than zero");
+			}
+			
+		} while (amount < 0);
+		
+		return amount;
+	}
 }

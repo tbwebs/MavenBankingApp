@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.revature.project0.bankinterfaces.InterUtil;
+import com.revature.project0.daos.AccountDAOImpl;
 import com.revature.project0.models.Account;
 import com.revature.project0.models.Role;
 import com.revature.project0.models.Status;
@@ -26,8 +27,15 @@ public class ProjectUtil implements InterUtil {
 		
 		ArrayList<String> credentials = new ArrayList<String>();
 		
-		credentials.add(username);
-		credentials.add(password);
+		if (username == "0" || password == "0") {
+			
+			credentials.add("0");
+			
+		} else {
+			
+			credentials.add(username);
+			credentials.add(password);
+		}
 		
 		return credentials;
 	}
@@ -151,6 +159,7 @@ public class ProjectUtil implements InterUtil {
 		
 		return currentAccount;
 	}
+
 	
 	public long generateAccountNumber() {
 		
@@ -276,7 +285,7 @@ public class ProjectUtil implements InterUtil {
 			
 			numInput = sc.nextInt();
 			
-			if (numInput > 6) {
+			if (numInput > 5) {
 				
 				System.out.println(Janus.customerOops());
 				
@@ -289,7 +298,7 @@ public class ProjectUtil implements InterUtil {
 				continue;
 			}
 			
-		} while (numInput < 0|| numInput > 6);
+		} while (numInput < 0|| numInput > 5);
 		
 		return numInput;
 	}
@@ -313,7 +322,7 @@ public class ProjectUtil implements InterUtil {
 			
 			numInput = sc.nextInt();
 			
-			if (numInput > 4) {
+			if (numInput > 3) {
 				
 				System.out.println(Janus.employeeOops());
 				
@@ -326,7 +335,7 @@ public class ProjectUtil implements InterUtil {
 				continue;
 			}
 			
-		} while (numInput < 0|| numInput > 4);
+		} while (numInput < 0|| numInput > 3);
 		
 		return numInput;
 
@@ -351,7 +360,7 @@ public class ProjectUtil implements InterUtil {
 			
 			numInput = sc.nextInt();
 			
-			if (numInput > 8) {
+			if (numInput > 7) {
 				
 				System.out.println(Janus.adminOops());
 				
@@ -364,9 +373,105 @@ public class ProjectUtil implements InterUtil {
 				continue;
 			}
 			
-		} while (numInput < 0|| numInput > 8);
+		} while (numInput < 0|| numInput > 7);
 		
 		return numInput;
+	}
+	
+	@Override
+	public void customerMenu(User user, ArrayList<Account> accounts) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int customerInput = this.validCustomerMenuInput();
+		
+		try {
+			
+			switch(customerInput) {
+		
+			case 0:
+				
+				System.out.println("need to break to previous menu");
+				break;
+			
+			case 1:
+				for (Account a : accounts) {
+					System.out.println(a);
+				}
+				customerMenu(user, accounts);
+			
+			case 2:
+				
+				if (accounts.size() > 1) {
+					
+					int count = 0;
+					
+					for (Account a : accounts) {
+						count++;
+						System.out.println("Account " + count + "\n" + a);
+					}
+					
+					System.out.println("Which account would you like to deposit to?");
+					
+					while (!sc.hasNextInt()) {
+						String input = sc.next();
+						System.out.print("Invalid input. Enter the number corresponding to your account.");
+						
+						if (sc.hasNextInt())
+							break;
+					}
+					
+					count = sc.nextInt();
+					
+					Account depositAccount = accounts.get(count-1);
+					
+					System.out.print("Enter how much you would like to deposit (i.e.: 10.50): ");
+					
+					double amount = sc.nextDouble();
+					
+					
+				
+				
+				}
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public void employeeMenu(ArrayList<Account> accounts) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void adminMenu(User user, ArrayList<Account> accounts) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public int checkRole(Role role) {
+		
+		int roleId = 0;
+		
+		if (role.getRoleId() == 1) {
+			
+			roleId = 1;
+			
+		} else if (role.getRoleId() == 2) {
+			
+			roleId = 2;
+			
+		} else {
+			
+			roleId = 3;
+		}
+		
+		return roleId;
 	}
 	
 	@Override
@@ -375,5 +480,4 @@ public class ProjectUtil implements InterUtil {
 		return usernameList.contains(username);
 	}
 
-	
 }

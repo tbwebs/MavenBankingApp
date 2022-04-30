@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.revature.project0.daos.UserDAOImpl;
 import com.revature.project0.models.Account;
+import com.revature.project0.models.Role;
 import com.revature.project0.models.User;
 
 /*
@@ -26,6 +27,14 @@ public interface InterUtil {
 	
 	//validates menu input
 	int validAdminMenuInput();
+	
+	void customerMenu(User user, ArrayList<Account> accounts);
+	
+	void employeeMenu(ArrayList<Account> accounts);
+	
+	void adminMenu(User user, ArrayList<Account> accounts);
+	
+	int checkRole(Role role);
 	
 	//for account model 
 	long generateAccountNumber();

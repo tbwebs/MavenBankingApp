@@ -67,14 +67,10 @@ public class Driver {
 		int accountCount = 0;
 		int linkCount = 0;
 		
-		int userId = 0;
-		
 		ArrayList<String> credentials;
 		
 		int menuSelection;
 		User currentUser;
-		Account newAccount;
-		ArrayList<User> userList = userDAO.getAllUsers();
 		
 		menuSelection = utility.validWelcomeMenuInput();
 		
@@ -84,35 +80,80 @@ public class Driver {
 			
 		} else if (menuSelection == 1) {
 			
+			/*
+			 * This is when the user is logging in. need to refactor to a menu method so I can recursively call this.
+			 * */
+			
 			credentials = utility.login();
 			
-			if (userDAO.doesUserExist(credentials.get(0), credentials.get(1))) {
-				
-				currentUser = userDAO.getUserByUsername(credentials.get(0));
-			}
-			else {
+			while (!userDAO.doesUserExist(credentials.get(0), credentials.get(1))) {
 				
 				System.out.println("The username/password was invalid. Try Again");
 				credentials = utility.login();
+				
+				if (userDAO.doesUserExist(credentials.get(0), credentials.get(1)))
+					break;
+					
+				if (credentials.get(0) == "0")
+					break;
+					
 			}
+			
+			/*
+			 * here I'm checking for role to determine which menus and options to display for user.
+			 * Keep working in driver to see if it works then refactor each part to make menu methods that I can call.
+			 *
+			 * */
+			
+			currentUser = userDAO.getUserByUsername(credentials.get(0));
+			
+			int currentUserRole = userDAO.getUserByUsername(credentials.get(0)).getRole().getRoleId();
+			
+			//customer
+			if (currentUserRole == 1) {
+				
+				System.out.print(Janus.customerGreeting());
+				
+				// will need this for any of the transactions
+				ArrayList<Account> currentAccounts = accountDAO.getAccountsbyUserId(currentUser.getUserId());
+				
+				utility.customerMenu(currentUser, currentAccounts);
+			
+			// employee
+			} else if (currentUserRole == 2) {
+				
+				//this should be easy, they can only view and approve accounts. Already refactered toString methods
+				System.out.print(Janus.employeeGreeting());
+				int employeeMenuInput = utility.validEmployeeMenuInput();
+				
+			// admin
+			} else {
+				
+				// This could take a while but most logic should be figured  out by now.
+				
+				System.out.print(Janus.adminGreeting());
+				int adminMenuInput = utility.validAdminMenuInput();
+				
+			}
+			
 		
 		} else {
+			
+			/*
+			 * This is when there is a new user and need they are registered. They will only be able to view
+			 * their account until an employee changes their status to "open".
+			 * Exit them out of this and make them login again so they can go through the logic above.
+			 * 
+			 * need to check for user role here too to determine if I need to make a AccountUser link.
+			 * */
 		
 			currentUser = utility.registerUser(userCount);
 			userCount = userDAO.createUser(currentUser);
 			
-			newAccount = utility.registerAccount(accountCount, userCount);
+			Account newAccount = utility.registerAccount(accountCount, userCount);
 			accountCount = accountDAO.createAccount(newAccount);
 			
 		}
-		
-		
-		
-		//check for role
-			// if customer need to create new account link
-		//show appropriate menu.
-		//loop through  options until user exits
-		
 		
 	}
 }
