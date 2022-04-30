@@ -2,7 +2,7 @@
 
 ## **Revature Project0**
 
-- The goal of Project0 of my Revature training program is to build this Java banking application. This project allowed me to demonstrate my knowledge of Java programming, while implementing the various technologies learned in training. This project utilizes Log4j for logging of transactions, JUnit for testing various methods, Maven to handle dependencies for sharing this application, and PostgreSQL for storing and parsing the various data from the application.
+The goal of Project0 of my Revature training program is to build this Java banking application. This project allowed me to demonstrate my knowledge of Java programming, while implementing the various technologies learned in training. This project utilizes Log4j for logging of transactions, JUnit for testing various methods, Maven to handle dependencies for sharing this application, and PostgreSQL for storing and parsing the various data from the application.
 
 ## **Class Models**
 
