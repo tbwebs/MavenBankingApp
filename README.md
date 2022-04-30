@@ -36,4 +36,4 @@
 
 #### **Janus**
 
-- This class simply holds the various `String` objects which interact with the user during the console session in order to inform them about what they should do, or let them know about invalid inputs. I tried to have some fun with his messages to the user.
+- This class simply holds the various `String` objects which interact with the user during the console session. `Janus` informs the user about what they should do, or let them know about invalid inputs. I tried to have some fun with his messages.
