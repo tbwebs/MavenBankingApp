@@ -19,7 +19,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User: " + firstName + " " + lastName + "\nUsername: " + username + "\nEmail: " + email + "\nRole: " + role.getRole();
+		return "User : " + firstName + " " + lastName + "\nUsername : " + username + "\nEmail : " + email + "\nRole : " + role.getRole();
 	}
 
 	public String getFirstName() {

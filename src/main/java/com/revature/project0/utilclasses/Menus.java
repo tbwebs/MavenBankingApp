@@ -8,6 +8,7 @@ import com.revature.project0.daos.AccountDAOImpl;
 import com.revature.project0.daos.AccountsUsersDAOImpl;
 import com.revature.project0.daos.UserDAOImpl;
 import com.revature.project0.models.Account;
+import com.revature.project0.models.Status;
 import com.revature.project0.models.User;
 
 public class Menus implements InterMenus {
@@ -72,7 +73,94 @@ public class Menus implements InterMenus {
 	public void employeeMenu(User user, ArrayList<Account> accounts, ArrayList<User> users, AccountDAOImpl accountDAO, UserDAOImpl userDAO,
 			AccountsUsersDAOImpl linkDAO) {
 		
+		Scanner sc = new Scanner(System.in);
 		
+		try {
+			int employeeInput;
+			ArrayList <String> usernameList = userDAO.getAllUsernames();
+			
+			do {
+				employeeInput = utility.validEmployeeMenuInput();
+				
+				if (employeeInput == 1) {
+					
+					System.out.print("\nEnter the username of the customer your searching for, or enter \"all\" to see all users: ");
+					
+					String input = sc.next();
+					
+					if (input.equals("all")) {
+						
+						for (User u : users) {
+							System.out.println("\n" + u);
+						}
+						
+					} else if (usernameList.contains(input)) {
+						
+						System.out.println(userDAO.getUserByUsername(input));
+						
+					} else {
+						
+						System.out.println("I can't seem to find that user.");
+					}
+					
+				} else if (employeeInput == 2) {
+					
+					int input = utility.validAccountViewMenu();
+					
+					if (input == 1) {
+						
+						String username;
+						do {
+							
+							System.out.print("Enter the username associated with the account(s): ");
+							username = sc.next();
+						
+						} while (!utility.checkUsername(usernameList, username));
+						
+						ArrayList<Account> selectedAccounts = accountDAO.getAccountsbyUsername(username);
+						
+						for (Account a : selectedAccounts) {
+							System.out.println("\n" + a);
+						}
+						
+					} else if (input == 2) {
+						
+						System.out.print("Enter the account number: ");
+						long accountNumber = sc.nextLong();
+						
+						System.out.println(accountDAO.getAccountByAccountNumber(accountNumber));
+						
+					} else {
+						
+						utility.showAccounts(accounts);
+					}
+					
+				} else {
+					
+					ArrayList<Account> pendingAccounts = accountDAO.getAccountsByStatus(1);
+					
+					utility.showAccounts(pendingAccounts);
+					
+					System.out.println("Would you like to approve these accounts? (y/n)");
+					
+					String input = sc.next();
+					
+					if (input.equals("y")) {
+						
+						for (Account a : pendingAccounts) {
+							a.setStatus(new Status(2, "open"));
+						}
+						System.out.println("Complete!");
+					}
+					
+				}
+				
+			} while (employeeInput != 0);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
 

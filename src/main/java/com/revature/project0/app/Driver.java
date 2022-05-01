@@ -41,6 +41,8 @@ public class Driver {
 			
 		System.out.println(Janus.janusGreeting());
 		
+		//controls main driver loop. REMOVE IF you are  getting weird infinite loops.
+		boolean run = true;
 		int menuSelection;
 		
 		do {
@@ -51,6 +53,7 @@ public class Driver {
 				case 0:
 					
 					System.out.println(Janus.farewell());
+					run = false;
 					break;
 					
 				case 1:
@@ -80,7 +83,12 @@ public class Driver {
 						
 					} else if (currentUserRole == 2) {
 						
-						//employee
+						System.out.println(Janus.employeeGreeting());
+						
+						ArrayList<Account> allAccounts = accountDAO.getAllAccounts();
+						
+						ArrayList<User> allUsers = userDAO.getAllUsers();
+						
 						
 					} else {
 						
@@ -117,7 +125,10 @@ public class Driver {
 				
 			}
 			
-		} while (menuSelection != 0);
+			if (!run)
+				break;
+			
+		} while (run);
 		
 	}
 }

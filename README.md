@@ -4,7 +4,7 @@
 
 The goal of Project0 of my Revature training program is to build this Java banking application. This project allowed me to demonstrate my knowledge of Java programming, while implementing the various technologies learned in training. The application utilizes Log4j for logging of transactions, JUnit for testing various methods, Maven to handle dependencies for sharing this application, and PostgreSQL for storing and parsing the various data from the application.
 
-## **Class Models**
+## **Classes**
 
 #### **User**
 
@@ -38,8 +38,13 @@ The goal of Project0 of my Revature training program is to build this Java banki
 
 - This class simply holds the various `String` objects which interact with the user during the console session. `Janus` informs the user about what they should do, or let them know about invalid inputs. I tried to have some fun with his messages.
 
+#### **Menus**
+
+- This class has three methods: `customerMenu`, `employeeMenu`, and `adminMenu`. Each method provides the logic flow for the `Driver` class's `main` method depending on which role the application user is.
+
 ## **Future Improvements**
 
-- Improve the Javalin implementation to utilize forms and HTML better to have prettier front end and don't have to use Postman.
+- Improve the Javalin implementation to utilize forms and HTML for a prettier front end.
 - Allow users to update their personal information.
 - Allow employees and admins to hold accounts.
+- Add color output and add more text output for improved clarity of operations.

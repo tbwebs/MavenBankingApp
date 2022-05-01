@@ -197,6 +197,32 @@ public class ProjectUtil implements InterUtil {
 		return randomNumber;
 	}
 	
+	
+	public int validAccountViewMenu() {
+		
+		Scanner sc = new Scanner(System.in);
+		int numInput;
+		
+		do {
+			System.out.print(Janus.employeeAccountLookupMenu());
+			
+			while (!sc.hasNextInt()) {
+				
+				String input = sc.next();
+				System.out.println("\nInvalid input, try again.");
+				System.out.print(Janus.employeeAccountLookupMenu());
+			}
+			
+			numInput = sc.nextInt();
+			
+			if (numInput > 3 || numInput < 0)
+				System.out.print("Invalid Input, try Again");
+			
+		} while (numInput < 0|| numInput > 3);
+		
+		return numInput;
+	}
+	
 	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
 	// 9 digits
 	public long generateRoutingNumber() {

@@ -62,10 +62,20 @@ public class Janus {
 	
 	public static String employeeMenu() {
 		
-		String menu = new String("\n1 : Lookup Customer\n"
+		String menu = new String("\n1 : Lookup User\n"
 				+ "2 : Lookup Account\n"
 				+ "3 : View Account Applications\n"
 				+ "Input: ");
+		
+		return menu;
+	}
+	
+	public static String employeeAccountLookupMenu() {
+		
+		String menu = new String("How can I help narrow down your search?\n"
+				+ "1 : Lookup by username\n"
+				+ "2 : Lookup by account number\n"
+				+ "3 : Lookup all accounts");
 		
 		return menu;
 	}
@@ -80,7 +90,7 @@ public class Janus {
 	
 	public static String adminMenu() {
 		
-		String menu = new String("\n1 : Lookup Customer\n"
+		String menu = new String("\n1 : Lookup User\n"
 				+ "2 : Lookup Account\n"
 				+ "3 : View Account Applications\n"
 				+ "4 : Deposit\n"
@@ -155,7 +165,7 @@ public class Janus {
 	
 	public static String loginOops() {
 		
-		String menu = "\nI don't have you in our system with those credentials, try again...\n";
+		String menu = new String("\nI don't have you in our system with those credentials, try again...\n");
 		
 		return menu;
 	}
