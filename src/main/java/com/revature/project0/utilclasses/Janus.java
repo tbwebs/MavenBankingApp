@@ -6,14 +6,14 @@ public class Janus {
 	public static String janusGreeting() {
 		
 		String menu = new String("Welcome human! My name is Janus, your digital assistant here at Revature Financial!\n\n"
-				+ "At anytime you can enter \"0\" to go back a menu, or if your here you'll exit the application:\n");
+				+ "You can enter \"0\" to go back a menu, or if your here you'll exit the application:\n");
 		
 		return menu;
 	}
 	
 	public static String welcomeMenu() {
 		
-		String menu = new String("1 : Log In\n"
+		String menu = new String("\n1 : Log In\n"
 				+ "2 : Register\n"
 				+ "Input: ");
 		
@@ -22,7 +22,13 @@ public class Janus {
 	
 	public static String farewell() {
 		
-		String menu = "Farewell human, come back soon!";
+		String menu = "\nFarewell human, come back soon!\n";
+		
+		return menu;
+	}
+	
+	public static String logOut() {
+		String menu = "\nYour tired of me already? Logging human out now.";
 		
 		return menu;
 	}
@@ -37,7 +43,7 @@ public class Janus {
 	
 	public static String customerMenu() {
 		
-		String menu = new String("1 : View Account(s)\n"
+		String menu = new String("\n1 : View Account(s)\n"
 				+ "2 : Deposit\n"
 				+ "3 : Withdraw\n"
 				+ "4 : Transfer\n"
@@ -56,7 +62,7 @@ public class Janus {
 	
 	public static String employeeMenu() {
 		
-		String menu = new String("1 : Lookup Customer\n"
+		String menu = new String("\n1 : Lookup Customer\n"
 				+ "2 : Lookup Account\n"
 				+ "3 : View Account Applications\n"
 				+ "Input: ");
@@ -74,7 +80,7 @@ public class Janus {
 	
 	public static String adminMenu() {
 		
-		String menu = new String("1 : Lookup Customer\n"
+		String menu = new String("\n1 : Lookup Customer\n"
 				+ "2 : Lookup Account\n"
 				+ "3 : View Account Applications\n"
 				+ "4 : Deposit\n"
@@ -98,6 +104,13 @@ public class Janus {
 	public static String registrationCompleteNotice() {
 		
 		String menu = new String("\nThank you for registering with Revature Financial. Goodbye for now!\n");
+		return menu;
+	}
+	
+	public static String successfulRegistration() {
+		String menu = new String("\nCongratulations on successfully registering with Revature Financial.\n"
+				+ "I'll log you out now but if you'd like to view your account or perform transactions please log in.\n"
+				+ "Goodbye!\n");
 		return menu;
 	}
 	
@@ -130,21 +143,6 @@ public class Janus {
 		return menu;
 	}
 	
-	public static String transDepositOops() {
-		
-		String menu = "\nOh you silly human... Negative deposits would be a withdrawal.\n"
-				+ "I'll accept positive values greater than zero.\n";
-			
-		return menu;
-	}
-	
-	public static String transWithdrawalOops() {
-		
-		String menu = "\nI see what your doing here... Two negatives make a positive right.\n"
-				+ "Remeber I only accept positive valuse greater than zero.\n";
-		
-		return menu;
-	}
 	
 	public static String transOverdraft() {
 		
@@ -154,13 +152,6 @@ public class Janus {
 		return menu;
 	}
 	
-	public static String transTransferOops() {
-		
-		String menu = "\nI don't understand human currency but mathematically that doesn't seem efficient,\n"
-				+ "you should enter a positive value greater than zero.\n";
-		
-		return menu;
-	}
 	
 	public static String loginOops() {
 		

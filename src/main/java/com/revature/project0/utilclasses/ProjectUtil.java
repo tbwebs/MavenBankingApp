@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 import com.revature.project0.bankinterfaces.InterUtil;
 import com.revature.project0.daos.AccountDAOImpl;
+import com.revature.project0.daos.AccountsUsersDAOImpl;
+import com.revature.project0.daos.UserDAOImpl;
 import com.revature.project0.models.Account;
+import com.revature.project0.models.AccountsUsers;
 import com.revature.project0.models.Role;
 import com.revature.project0.models.Status;
 import com.revature.project0.models.Type;
@@ -15,33 +18,53 @@ import com.revature.project0.models.User;
 public class ProjectUtil implements InterUtil {
 	
 	@Override
-	public ArrayList<String> login() {
+	public String cleanName(String name) {
+		String cleanedName = name.substring(0, 1).toUpperCase() + name.substring(1);
+		return cleanedName;
+	}
+	
+	@Override
+	public ArrayList<String> login(UserDAOImpl userDAO) {
 		
 		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("Enter your username: ");
-		String username = sc.next();
-		
-		System.out.print("Enter your password: ");
-		String password = sc.next();
-		
 		ArrayList<String> credentials = new ArrayList<String>();
 		
-		if (username == "0" || password == "0") {
+		try {
 			
-			credentials.add("0");
+			do {
+				
+				System.out.print("\nEnter your username: ");
+				String username = sc.next();
 			
-		} else {
+				System.out.print("Enter your password: ");
+				String password = sc.next();
+				
+				credentials.add(username);
+				credentials.add(password);
+				
+				if (credentials.get(0).equals("0") || credentials.get(1).equals("0"))
+					break;
+				
+				if (!userDAO.doesUserExist(credentials.get(0), credentials.get(1)))
+					System.out.println(Janus.loginOops());
 			
-			credentials.add(username);
-			credentials.add(password);
+			} while(!userDAO.doesUserExist(credentials.get(0), credentials.get(1)));
+			
+		} catch(Exception e) {
+			
+			e.printStackTrace();
 		}
 		
 		return credentials;
 	}
 	
+	public boolean checkUsername(ArrayList<String> usernameList, String username) {
+		
+		return usernameList.contains(username);
+	}
+	
 	@Override
-	public User registerUser(int userCount) {
+	public User registerUser(UserDAOImpl userDAO) {
 		
 		User currentUser = new User();
 		Role currentRole = new Role();
@@ -51,27 +74,33 @@ public class ProjectUtil implements InterUtil {
 		String email;
 		String password;
 		int roleSelection;
+		ArrayList<String> usernameList = userDAO.getAllUsernames();
 		
 		Scanner sc = new Scanner(System.in);
 		
 		try {
 			
 			System.out.print("Enter your first name: ");
-			firstName = sc.next();
+			String rawfirstName = sc.next();
+			firstName = this.cleanName(rawfirstName);
+			
 			System.out.print("Enter your last name: ");
-			lastName = sc.next();
-			System.out.print("Enter a username: ");
-			username = sc.next();
+			String rawlastName = sc.next();
+			lastName = this.cleanName(rawlastName);
+			
+			do {
+				System.out.print("Enter a username (prompt will repeat if username already exists): ");
+				username = sc.next();
+			
+			} while (this.checkUsername(usernameList, username));
+			
 			System.out.print("Enter your email: ");
 			email = sc.next();
+			
 			System.out.print("Enter your password: ");
 			password = sc.next();
-			System.out.print("What is your role with Revature Financial?\n"
-					+ "1 : New customer\n"
-					+ "2 : New employee\n"
-					+ "3 : New admin\n"
-					+ "Input: ");
-			roleSelection = sc.nextInt();
+			
+			roleSelection = this.selectRegistrationRole();
 			
 			if (roleSelection == 1) {
 				
@@ -89,12 +118,11 @@ public class ProjectUtil implements InterUtil {
 				currentRole.setRole("admin");
 			}
 			
-			currentUser.setUserId(userCount);
+			currentUser.setUsername(username);
+			currentUser.setPassword(password);
 			currentUser.setFirstName(firstName);
 			currentUser.setLastName(lastName);
-			currentUser.setUsername(username);
 			currentUser.setEmail(email);
-			currentUser.setPassword(password);
 			currentUser.setRole(currentRole);
 			
 		} catch (Exception e) {
@@ -105,7 +133,7 @@ public class ProjectUtil implements InterUtil {
 	}
 
 	@Override
-	public Account registerAccount(int accountCount, int userCount) {
+	public Account registerAccount(UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO) {
 		
 		Account currentAccount = new Account();
 		Type currentType = new Type();
@@ -119,11 +147,7 @@ public class ProjectUtil implements InterUtil {
 		
 		try {
 			
-			System.out.print("What kind of account do you want to open?\n"
-					+ "1 : personal\n"
-					+ "2 : joint\n"
-					+ "Input: ");
-			typeSelection = sc.nextInt();
+			typeSelection = this.selectRegisterAccountType();
 			
 			if (typeSelection == 1) {
 				
@@ -133,17 +157,20 @@ public class ProjectUtil implements InterUtil {
 			} else {
 				
 				System.out.println("Please register the second account holder.");
-				User secondUser = this.registerUser(userCount);
+				User secondUser = this.registerUser(userDAO);
+				userDAO.createUser(secondUser);	
+				
+				int count = linkDAO.getLinkCount();
+				AccountsUsers secondLink = new AccountsUsers(count + 1, secondUser.getUsername(), newAccountNum);
+				linkDAO.createAccountsUsersLink(secondLink);
+				
 				currentType.setTypeId(2);
 				currentType.setType("joint");
 				
 			}
-			
-			System.out.print(Janus.initialDepositNotice());
-			
-			initialDeposit = sc.nextDouble();
+						
+			initialDeposit = this.getInitialDeposit();
 	
-			currentAccount.setAccountId(accountCount);
 			currentAccount.setAccountNumber(newAccountNum);
 			currentAccount.setRoutingNumber(newRoutingNum);
 			currentAccount.setBalance(initialDeposit);
@@ -159,7 +186,6 @@ public class ProjectUtil implements InterUtil {
 		
 		return currentAccount;
 	}
-
 	
 	public long generateAccountNumber() {
 		
@@ -183,44 +209,6 @@ public class ProjectUtil implements InterUtil {
 		return randomNumber;
 		
 	}
-	
-	public int generateRandomNumber() {
-		
-		int min = 10;
-		int max = 99;
-		
-		int randomNumber = (int) Math.floor(Math.random()*(max-min+1)+min);
-		return randomNumber;
-	}
-	
-	//This will update the amount of users there are for new primary key entries
-	public int updateUserCount(int userCount) {
-		
-		userCount += 1;
-		return userCount;
-	}
-	
-	//This will update the amount of accounts there are for new primary key entries
-	public static int updateAccountCount(int accountCount) {
-		
-		accountCount += 1;
-		return accountCount;
-	}
-	
-	//This will update the amount of links for new link primary keys. This value will probably be higher than the others.
-	public static int updateLinkCount(int linkCount) {
-		
-		linkCount += 1;
-		return linkCount;
-	}
-
-
-	@Override
-	public String showAccountInfo(User currentUser) {
-		
-		return null;
-	}
-	
 
 	/*
 	 * The following 4 methods will be menu loops to validate input from human
@@ -373,111 +361,153 @@ public class ProjectUtil implements InterUtil {
 				continue;
 			}
 			
-		} while (numInput < 0|| numInput > 7);
+		} while (numInput < 0 || numInput > 7);
+		
+		return numInput;
+	}
+	
+	public boolean checkAccountStatus(Account account) {
+		
+		String status = account.getStatus().getStatus();
+		
+		if (status.equals("open"))
+			return true;
+		
+		return false;
+	}
+
+	public void showAccounts(ArrayList<Account> accounts) {
+		
+		int count = 0;
+		
+		for (int i = 0; i < accounts.size(); i++) {
+			count++;
+			System.out.println("\nAccount " + count + "\n" + accounts.get(i));
+		}
+		
+	}
+	
+	public Account chooseAccount(ArrayList<Account> accounts) {
+		
+		Scanner sc = new Scanner(System.in);
+		Account chosenAccount = new Account();
+		
+		try {
+			do {
+				int count = 0;
+				
+				for (Account a : accounts) {
+					count++;
+					System.out.println("\nAccount " + count + "\n" + a);
+				}
+				
+				System.out.print("\nEnter the number of the account you would like to choose (i.e. \"1\"): ");
+				
+				while (!sc.hasNextInt()) {
+					String input = sc.next();
+					System.out.print("Invalid input. Enter the number corresponding to your account (i.e. \"1\"): ");
+				}
+				
+				count = sc.nextInt();
+				
+				if (count == 0)
+					break;
+				
+				chosenAccount = accounts.get(count-1);
+				
+				if (!checkAccountStatus(chosenAccount)) {
+					System.out.println("That account is either closed or pending.\n"
+							+ "You can only perform transactions with open accounts...");
+					
+					Thread.sleep(2000);
+				}
+					
+				
+			} while (!checkAccountStatus(chosenAccount));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return chosenAccount;
+	}
+
+	@Override
+	public int selectRegistrationRole() {
+		int numInput;
+		Scanner sc = new Scanner(System.in);
+		
+		do {
+			System.out.print("What is your role with Revature Financial?\n"
+					+ "1 : New customer\n"
+					+ "2 : New employee\n"
+					+ "3 : New admin\n"
+					+ "Input: ");
+			
+			while (!sc.hasNextInt()) {
+				String input = sc.next();
+				System.out.println("Select a number, 1 through 3, to choose your role with us.");
+				System.out.print("What is your role with Revature Financial?\n"
+						+ "1 : New customer\n"
+						+ "2 : New employee\n"
+						+ "3 : New admin\n"
+						+ "Input: ");
+			}
+			
+			numInput = sc.nextInt();
+			
+		} while (numInput < 0 || numInput > 3);
 		
 		return numInput;
 	}
 	
 	@Override
-	public void customerMenu(User user, ArrayList<Account> accounts) {
-		
+	public int selectRegisterAccountType() {
+		int numInput;
 		Scanner sc = new Scanner(System.in);
 		
-		int customerInput = this.validCustomerMenuInput();
-		
-		try {
+		do {
+			System.out.print("What kind of account do you want to open?\n"
+					+ "1 : personal\n"
+					+ "2 : joint\n"
+					+ "Input: ");
 			
-			switch(customerInput) {
-		
-			case 0:
-				
-				System.out.println("need to break to previous menu");
-				break;
-			
-			case 1:
-				for (Account a : accounts) {
-					System.out.println(a);
-				}
-				customerMenu(user, accounts);
-			
-			case 2:
-				
-				if (accounts.size() > 1) {
-					
-					int count = 0;
-					
-					for (Account a : accounts) {
-						count++;
-						System.out.println("Account " + count + "\n" + a);
-					}
-					
-					System.out.println("Which account would you like to deposit to?");
-					
-					while (!sc.hasNextInt()) {
-						String input = sc.next();
-						System.out.print("Invalid input. Enter the number corresponding to your account.");
-						
-						if (sc.hasNextInt())
-							break;
-					}
-					
-					count = sc.nextInt();
-					
-					Account depositAccount = accounts.get(count-1);
-					
-					System.out.print("Enter how much you would like to deposit (i.e.: 10.50): ");
-					
-					double amount = sc.nextDouble();
-					
-					
-				
-				
-				}
+			while (!sc.hasNextInt()) {
+				String input = sc.next();
+				System.out.println("Select a number, 1 through 2, to choose your account type.");
+				System.out.print("What kind of account do you want to open?\n"
+						+ "1 : personal\n"
+						+ "2 : joint\n"
+						+ "Input: ");
 			}
-		} catch (Exception e) {
 			
-			e.printStackTrace();
-		}
+			numInput = sc.nextInt();
+			
+		} while (numInput < 0 || numInput > 2);
 		
-		
-	}
-
-	@Override
-	public void employeeMenu(ArrayList<Account> accounts) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void adminMenu(User user, ArrayList<Account> accounts) {
-		// TODO Auto-generated method stub
-		
+		return numInput;
 	}
 	
-	public int checkRole(Role role) {
-		
-		int roleId = 0;
-		
-		if (role.getRoleId() == 1) {
-			
-			roleId = 1;
-			
-		} else if (role.getRoleId() == 2) {
-			
-			roleId = 2;
-			
-		} else {
-			
-			roleId = 3;
-		}
-		
-		return roleId;
-	}
+	public double getInitialDeposit() {
 	
-	@Override
-	public boolean checkForSameUsername(ArrayList<String> usernameList, String username) {
+		Scanner sc = new Scanner(System.in);
+		double deposit;
 		
-		return usernameList.contains(username);
+		do {
+			
+			System.out.print(Janus.initialDepositNotice());
+		
+			while(!sc.hasNextDouble()) {
+				
+				String input = sc.next();
+				System.out.print("Please enter a positive numeric amount more than zero: ");
+		
+			}
+			deposit = sc.nextDouble();
+		
+		} while (deposit < 0);
+		
+	return deposit;
 	}
 
 }

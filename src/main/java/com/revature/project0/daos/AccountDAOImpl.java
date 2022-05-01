@@ -14,16 +14,15 @@ import com.revature.project0.models.Type;
 public class AccountDAOImpl implements AccountDAO {
 
 	@Override //TESTED
-	public int createAccount(Account newAccount) {
+	public void createAccount(Account newAccount) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
-		int creationId = 0;
 		String query = "INSERT INTO accounts (account_num, routing_num, balance, account_type_id, account_status_id) VALUES (?, ?, ?, ?, ?)";
 		
 		try {
 			
-			PreparedStatement pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pst = conn.prepareStatement(query);
 			
 			pst.setLong(1, newAccount.getAccountNumber());
 			pst.setLong(2, newAccount.getRoutingNumber());
@@ -32,42 +31,34 @@ public class AccountDAOImpl implements AccountDAO {
 			pst.setInt(5, newAccount.getStatus().getStatusId());
 			
 			pst.execute();
-			ResultSet rs = pst.getGeneratedKeys();
-			
-			while(rs.next()) {
-				
-				creationId = rs.getInt(1);
-			}
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
 		
-		return creationId;
 	}
 
 	@Override //TESTED
-	public Account getAccountById(int accountId) {
+	public Account getAccountByAccountNumber(long accountNumber) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
 		Account account = new Account();
-		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_id = ?";
+		String query = "SELECT accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_num = ?";
 		
 		try {
 			
 			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setInt(1, accountId);
+			pst.setLong(1, accountNumber);
 			ResultSet rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				account.setAccountId(rs.getInt(1));
-				account.setAccountNumber(rs.getLong(2));
-				account.setRoutingNumber(rs.getLong(3));
-				account.setBalance(rs.getDouble(4));
-				account.setType(new Type(rs.getInt(5), rs.getString(6)));
-				account.setStatus(new Status(rs.getInt(7), rs.getString(8)));
+				account.setAccountNumber(rs.getLong(1));
+				account.setRoutingNumber(rs.getLong(2));
+				account.setBalance(rs.getDouble(3));
+				account.setType(new Type(rs.getInt(4), rs.getString(5)));
+				account.setStatus(new Status(rs.getInt(6), rs.getString(7)));
 			}
 			
 		} catch (SQLException e) {
@@ -84,7 +75,7 @@ public class AccountDAOImpl implements AccountDAO {
 		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
-		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id ORDER BY accounts.account_id ASC";
+		String query = "SELECT accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id";
 		
 		try {
 			
@@ -94,12 +85,12 @@ public class AccountDAOImpl implements AccountDAO {
 			while (rs.next()) {
 				
 				accountList.add(new Account(
-						rs.getInt(1),
+
+						rs.getLong(1),
 						rs.getLong(2),
-						rs.getLong(3),
-						rs.getDouble(4),
-						new Type(rs.getInt(5), rs.getString(6)),
-						new Status(rs.getInt(7), rs.getString(8))));
+						rs.getDouble(3),
+						new Type(rs.getInt(4), rs.getString(5)),
+						new Status(rs.getInt(6), rs.getString(7))));
 				
 			}
 			
@@ -115,7 +106,7 @@ public class AccountDAOImpl implements AccountDAO {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
-		String query = "UPDATE accounts SET balance = ?, account_type_id = ?, account_status_id = ? WHERE account_id = ?";
+		String query = "UPDATE accounts SET balance = ?, account_type_id = ?, account_status_id = ? WHERE account_num = ?";
 		
 		try {
 			
@@ -123,7 +114,7 @@ public class AccountDAOImpl implements AccountDAO {
 			pst.setDouble(1, currentAccount.getBalance());
 			pst.setInt(2, currentAccount.getType().getTypeId());
 			pst.setInt(3, currentAccount.getStatus().getStatusId());
-			pst.setInt(4, currentAccount.getAccountId());
+			pst.setLong(4, currentAccount.getAccountNumber());
 			pst.execute();
 			
 		} catch (SQLException e) {
@@ -133,16 +124,16 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override //TESTED
-	public void deleteAccountById(int accountId) {
+	public void deleteAccountByAccountNumber(long accountNumber) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
-		String query = "DELETE FROM accounts WHERE account_id = ?";
+		String query = "DELETE FROM accounts WHERE account_num = ?";
 		
 		try {
 			
 			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setInt(1, accountId);
+			pst.setLong(1, accountNumber);
 			pst.execute();
 			
 		} catch (SQLException e) {
@@ -158,7 +149,7 @@ public class AccountDAOImpl implements AccountDAO {
 		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
-		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_status_id = ? ORDER BY accounts.account_id ASC";
+		String query = "SELECT accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts.account_status_id = ?";
 		
 		try {
 			
@@ -169,12 +160,11 @@ public class AccountDAOImpl implements AccountDAO {
 			while (rs.next()) {
 				
 				accountList.add(new Account(
-						rs.getInt(1),
+						rs.getLong(1),
 						rs.getLong(2),
-						rs.getLong(3),
-						rs.getDouble(4),
-						new Type(rs.getInt(5), rs.getString(6)),
-						new Status(rs.getInt(7), rs.getString(8))));
+						rs.getDouble(3),
+						new Type(rs.getInt(4), rs.getString(6)),
+						new Status(rs.getInt(6), rs.getString(7))));
 			}
 			
 		} catch (SQLException e) {
@@ -186,28 +176,27 @@ public class AccountDAOImpl implements AccountDAO {
 
 	//I don't really know if I need this method or not
 	@Override //TESTED
-	public ArrayList<Account> getAccountsbyUserId(int userId) {
+	public ArrayList<Account> getAccountsbyUsername(String username) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
-		String query = "SELECT accounts.account_id, accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_id = accounts.account_id INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.user_id = ? ORDER BY accounts.account_id ASC";
+		String query = "SELECT accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_num = accounts.account_num INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.username = ?";
 		
 		try {
 			
 			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setInt(1, userId);
+			pst.setString(1, username);
 			ResultSet rs = pst.executeQuery();
 			
 			while (rs.next()) {
 				
 				accountList.add(new Account(
-						rs.getInt(1),
+						rs.getLong(1),
 						rs.getLong(2),
-						rs.getLong(3),
-						rs.getDouble(4),
-						new Type(rs.getInt(5), rs.getString(6)),
-						new Status(rs.getInt(7), rs.getString(8))));
+						rs.getDouble(3),
+						new Type(rs.getInt(4), rs.getString(5)),
+						new Status(rs.getInt(6), rs.getString(7))));
 			}
 			
 		} catch (SQLException e) {

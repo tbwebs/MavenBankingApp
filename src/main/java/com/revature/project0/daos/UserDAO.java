@@ -7,13 +7,11 @@ import com.revature.project0.models.User;
 
 public interface UserDAO {
 
-	public int createUser(User newUser);
-	
-	public User getUserById(int userId);
+	public void createUser(User newUser);
 	
 	public User getUserByUsername(String username);
 	
-	public ArrayList<User> getUsersByAccountId(int accountId);
+	public ArrayList<User> getUsersByAccountNumber(long accountNumber);
 	
 	public ArrayList<User> getAllUsers();
 	
@@ -21,7 +19,7 @@ public interface UserDAO {
 
 	public void updateUser(User currentUser);
 	
-	public void deleteUserById(int userId);
+	public void deleteUserByUsername(String username);
 	
 	//for login
 	public boolean doesUserExist(String username, String password);

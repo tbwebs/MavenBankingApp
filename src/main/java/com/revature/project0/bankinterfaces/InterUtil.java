@@ -3,6 +3,8 @@ package com.revature.project0.bankinterfaces;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.project0.daos.AccountDAOImpl;
+import com.revature.project0.daos.AccountsUsersDAOImpl;
 import com.revature.project0.daos.UserDAOImpl;
 import com.revature.project0.models.Account;
 import com.revature.project0.models.Role;
@@ -14,7 +16,9 @@ import com.revature.project0.models.User;
 
 public interface InterUtil {
 	
-	ArrayList<String> login();
+	public String cleanName(String name);
+	
+	ArrayList<String> login(UserDAOImpl userDAO);
 	
 	//validates menu input
 	int validWelcomeMenuInput();
@@ -28,13 +32,11 @@ public interface InterUtil {
 	//validates menu input
 	int validAdminMenuInput();
 	
-	void customerMenu(User user, ArrayList<Account> accounts);
+	boolean checkAccountStatus(Account account);
 	
-	void employeeMenu(ArrayList<Account> accounts);
+	void showAccounts(ArrayList<Account> accounts);
 	
-	void adminMenu(User user, ArrayList<Account> accounts);
-	
-	int checkRole(Role role);
+	Account chooseAccount(ArrayList<Account> accounts);
 	
 	//for account model 
 	long generateAccountNumber();
@@ -42,18 +44,17 @@ public interface InterUtil {
 	//for account model
 	long generateRoutingNumber();
 	
-	//for username creation
-	int generateRandomNumber();
+	int selectRegistrationRole();
 
+	boolean checkUsername(ArrayList<String> usernameList, String username);
+	
 	// creates new 
-	User registerUser(int userCount);
+	User registerUser(UserDAOImpl userDAO);
 	
-	Account registerAccount(int accountCount, int userCount);
+	Account registerAccount(UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO);
 	
-	//shows general account info on login. Basically return the account toString method
-	String showAccountInfo(User currentUser);
+	int selectRegisterAccountType();
 	
-	boolean checkForSameUsername(ArrayList<String> usernameList, String username);
-
+	double getInitialDeposit();
 
 }

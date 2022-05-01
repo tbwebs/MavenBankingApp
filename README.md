@@ -37,3 +37,9 @@ The goal of Project0 of my Revature training program is to build this Java banki
 #### **Janus**
 
 - This class simply holds the various `String` objects which interact with the user during the console session. `Janus` informs the user about what they should do, or let them know about invalid inputs. I tried to have some fun with his messages.
+
+## **Future Improvements**
+
+- Improve the Javalin implementation to utilize forms and HTML better to have prettier front end and don't have to use Postman.
+- Allow users to update their personal information.
+- Allow employees and admins to hold accounts.

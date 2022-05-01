@@ -3,7 +3,6 @@ package com.revature.project0.models;
 //Holds columns for account database. AccountType will be joing or personal, and status will be pending/open/closed
 public class Account {
 	
-	private int accountId;
 	private long accountNumber;
 	private long routingNumber;
 	private double balance;
@@ -14,8 +13,7 @@ public class Account {
 	public Account() { super(); }
 	
 	//for joint account
-	public Account(int accountId, long accountNumber, long routingNumber, double initialBalance, Type type, Status status) {
-		this.accountId = accountId;
+	public Account(long accountNumber, long routingNumber, double initialBalance, Type type, Status status) {
 		this.accountNumber = accountNumber;
 		this.routingNumber = routingNumber;
 		this.balance = initialBalance;
@@ -24,14 +22,6 @@ public class Account {
 		
 	}
 
-	public int getAccountId() {
-		return this.accountId;
-	}
-	
-	public void setAccountId(int newId) {
-		this.accountId = newId;
-	}
-	
 	public long getAccountNumber() {
 		return this.accountNumber;
 	}

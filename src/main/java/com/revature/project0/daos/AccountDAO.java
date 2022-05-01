@@ -6,11 +6,11 @@ import com.revature.project0.models.Account;
 
 public interface AccountDAO {
 
-	public int createAccount(Account newAccount); // insert a new account into accounts table
+	public void createAccount(Account newAccount); // insert a new account into accounts table
 	
-	public Account getAccountById(int accountId);
+	public Account getAccountByAccountNumber(long accountNumber);
 	
-	public ArrayList<Account> getAccountsbyUserId(int userId);
+	public ArrayList<Account> getAccountsbyUsername(String username);
 	
 	public ArrayList<Account> getAllAccounts();
 	
@@ -18,6 +18,6 @@ public interface AccountDAO {
 
 	public void updateAccount(Account currentAccount);
 	
-	public void deleteAccountById(int account_id);
+	public void deleteAccountByAccountNumber(long accountNumber);
 	
 }

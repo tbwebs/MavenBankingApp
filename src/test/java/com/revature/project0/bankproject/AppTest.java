@@ -8,7 +8,6 @@ import com.revature.project0.models.Status;
 import com.revature.project0.models.Type;
 import com.revature.project0.models.User;
 import com.revature.project0.utilclasses.ProjectUtil;
-import com.revature.project0.utilclasses.StringCleaner;
 import com.revature.project0.utilclasses.Transactions;
 
 import static org.junit.Assert.assertEquals;
@@ -22,12 +21,11 @@ public class AppTest
 	Transactions transTest = new Transactions();
 	Account testAccount = new Account(0, pUtil.generateAccountNumber(), pUtil.generateRoutingNumber(), 20.00, new Type(1, "personal"), new Status(1, "pending"));
 	Account testAccount2 = new Account(1, pUtil.generateAccountNumber(), pUtil.generateRoutingNumber(), 30.00, new Type(2, "joint"), new Status(2, "open"));
-	StringCleaner stringClean = new StringCleaner();
 	
 	
-	@Test
-	public void testValidMenus() {
-		
+//	@Test
+//	public void testValidMenus() {
+//		
 //		assertEquals(pUtil.validWelcomeMenuInput(), 0);
 //		assertEquals(pUtil.validWelcomeMenuInput(), 1);
 //		assertEquals(pUtil.validWelcomeMenuInput(), 2);
@@ -55,7 +53,7 @@ public class AppTest
 //		assertEquals(pUtil.validAdminMenuInput(), 7);
 //		assertEquals(pUtil.validAdminMenuInput(), 8);
 
-	}
+//	}
 	
 //	@Test
 //	public void testDeposit() {
@@ -83,18 +81,11 @@ public class AppTest
 //	}
 	
 	@Test
-	public void testUsernameCheck() {
-		
-		ArrayList<String> testUsernames = new ArrayList<String>();
-		testUsernames.add("victor.griffin");
-		testUsernames.add("chloe.griffith");
-		testUsernames.add("chloe.griffith1");
-		
-		assertEquals(false, pUtil.checkForSameUsername(testUsernames, "jimmy.fuller"));
-		assertEquals(true, pUtil.checkForSameUsername(testUsernames, "victor.griffin"));
-		assertEquals(false, pUtil.checkForSameUsername(testUsernames, "chloe.griffith11"));
-
+	public void testCleanName() {
+		assertEquals("Trey", pUtil.cleanName("trey"));
+		assertEquals("Lafdjk", pUtil.cleanName("Lafdjk"));
 	}
+	
 	
 
 	

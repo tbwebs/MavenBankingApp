@@ -4,11 +4,11 @@ import com.revature.project0.models.Account;
 
 public interface InterTransactions {
 	
-	double deposit(Account account);
+	void deposit(Account account);
 	
-	double withdraw(Account account);
+	void withdraw(Account account);
 	
-	double transfer(Account fromAccount, Account toAccount);
+	void transfer(Account fromAccount, Account toAccount);
 	
 	double getAmount();
 

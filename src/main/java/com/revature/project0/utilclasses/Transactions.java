@@ -10,7 +10,7 @@ import com.revature.project0.models.Account;
 public class Transactions implements InterTransactions {
 
 	@Override
-	public double deposit(Account account) {
+	public void deposit(Account account) {
 		
 		double newBalance = 0;
 		
@@ -22,15 +22,16 @@ public class Transactions implements InterTransactions {
 
 			newBalance = accountBalance + amount;
 			
+			account.setBalance(newBalance);
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		return newBalance;
 	}
 
 	@Override
-	public double withdraw(Account account) {
+	public void withdraw(Account account) {
 		
 		double accountBalance = account.getBalance();
 		double newBalance = 0;
@@ -48,16 +49,17 @@ public class Transactions implements InterTransactions {
 				
 			} while (newBalance < 0);
 			
+			account.setBalance(newBalance);
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
 		
-		return newBalance;
 	}
 
 	@Override
-	public double transfer(Account fromAccount, Account toAccount) {
+	public void transfer(Account fromAccount, Account toAccount) {
 		
 		double from = fromAccount.getBalance();
 		double reciever = toAccount.getBalance();
@@ -71,25 +73,28 @@ public class Transactions implements InterTransactions {
 				double amount = this.getAmount();
 				
 				difference = from - amount;
-				sum = reciever + amount;
+				
 				
 				if (difference < 0)
 					System.out.print(Janus.transOverdraft());
 				
+				sum = reciever + amount;
+				
 			} while (difference < 0);
+			
+			fromAccount.setBalance(difference);
+			toAccount.setBalance(sum);
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		return sum;
 
 	}
 
 	@Override
 	public double getAmount() {
-		
-
+	
 		Scanner sc = new Scanner(System.in);
 		double amount;
 		
