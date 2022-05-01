@@ -22,13 +22,7 @@ public class Janus {
 	
 	public static String farewell() {
 		
-		String menu = "\nFarewell human, come back soon!\n";
-		
-		return menu;
-	}
-	
-	public static String logOut() {
-		String menu = "\nYour tired of me already? Logging human out now.";
+		String menu = "\nFarewell human, come back soon!";
 		
 		return menu;
 	}

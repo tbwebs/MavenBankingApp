@@ -28,27 +28,38 @@ public class ProjectUtil implements InterUtil {
 		
 		Scanner sc = new Scanner(System.in);
 		ArrayList<String> credentials = new ArrayList<String>();
+		String username;
+		String password;
 		
 		try {
 			
 			do {
 				
 				System.out.print("\nEnter your username: ");
-				String username = sc.next();
-			
+				username = sc.next();
 				System.out.print("Enter your password: ");
-				String password = sc.next();
+				password = sc.next();
 				
-				credentials.add(username);
-				credentials.add(password);
-				
-				if (credentials.get(0).equals("0") || credentials.get(1).equals("0"))
+				if (username.equals("0") || password.equals("0")) {
+					credentials.add("0");
 					break;
 				
-				if (!userDAO.doesUserExist(credentials.get(0), credentials.get(1)))
-					System.out.println(Janus.loginOops());
+				} else if (userDAO.doesUserExist(username, password)) {
+					
+					credentials.add(username);
+					credentials.add(password);
+					
+				} else if (!userDAO.doesUserExist(username, password)) {
+					
+					System.out.print(Janus.loginOops());
+					
+				} else {
+					
+					continue;
+				}
+					
+			} while(!userDAO.doesUserExist(username, password));
 			
-			} while(!userDAO.doesUserExist(credentials.get(0), credentials.get(1)));
 			
 		} catch(Exception e) {
 			
@@ -190,11 +201,12 @@ public class ProjectUtil implements InterUtil {
 				
 				int count = linkDAO.getLinkCount();
 				link = new AccountsUsers(count + 1, currentUser.getUsername(), newAccount.getAccountNumber());
-				linkDAO.createAccountsUsersLink(link);
 				
 				int jointCount = linkDAO.getLinkCount();
 				jointLink = new AccountsUsers(jointCount + 1, secondUser.getUsername(), newAccount.getAccountNumber());
+				
 				linkDAO.createAccountsUsersLink(link);
+				linkDAO.createAccountsUsersLink(jointLink);
 				
 			}
 			

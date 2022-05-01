@@ -15,8 +15,7 @@ public class Menus implements InterMenus {
 	
 	ProjectUtil utility = new ProjectUtil();
 
-	@Override
-	public void customerMenu(User user, ArrayList<Account> currentAccounts, AccountDAOImpl accountDAO, UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO) {
+	public void customerMenu(User user, AccountDAOImpl accountDAO, UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO) {
 		
 		Transactions trans = new Transactions();
 		
@@ -25,6 +24,8 @@ public class Menus implements InterMenus {
 			int customerInput;
 			
 			do {
+				ArrayList<Account> currentAccounts = accountDAO.getAccountsbyUsername(user.getUsername());
+						
 				customerInput = utility.validCustomerMenuInput();
 				
 				if (customerInput == 1) {
@@ -45,11 +46,19 @@ public class Menus implements InterMenus {
 					
 				} else if (customerInput == 4) {
 					
-					Account fromAccount = utility.chooseAccount(currentAccounts);
-					Account toAccount  = utility.chooseAccount(currentAccounts);
-					trans.transfer(fromAccount, toAccount);
-					accountDAO.updateAccount(toAccount);
-					accountDAO.updateAccount(fromAccount);
+					if (currentAccounts.size() > 1) {
+						
+						Account fromAccount = utility.chooseAccount(currentAccounts);
+						Account toAccount  = utility.chooseAccount(currentAccounts);
+						trans.transfer(fromAccount, toAccount);
+						accountDAO.updateAccount(toAccount);
+						accountDAO.updateAccount(fromAccount);
+						
+					} else {
+						
+						System.out.println("\nYou only have one account. Open another account to transfer funds.");
+					}
+					
 					
 				} else if (customerInput == 5) {
 					
@@ -154,7 +163,7 @@ public class Menus implements InterMenus {
 					
 					if (accountsToApprove.size() == 0) {
 						
-						System.out.print("\nAll accounts are open.");
+						System.out.println("\nAll accounts are open.");
 						continue;
 						
 					} else {
@@ -178,8 +187,6 @@ public class Menus implements InterMenus {
 							System.out.println("Nevermind than...");
 						}
 					}
-					
-					
 					
 				} else {
 					
@@ -276,27 +283,38 @@ public class Menus implements InterMenus {
 					ArrayList<Account> closedAccounts = accountDAO.getAccountsByStatus(3);
 					
 					if (closedAccounts.size() > 0) {
+						
 						for (Account a : closedAccounts) {
 							accountsToApprove.add(a);
 						}
 					}
 					
-					utility.showAccounts(accountsToApprove);
-					
-					System.out.print("\nWould you like to approve these accounts? (y/n): ");
-					
-					String input = sc.next();
-					
-					if (input.equals("y")) {
+					if (accountsToApprove.size() == 0) {
 						
-						for (Account a : accountsToApprove) {
-							a.setStatus(new Status(2, "open"));
-							accountDAO.updateAccount(a);
-						}
-						System.out.println("Complete!");
+						System.out.println("\nAll accounts are open.");
+						continue;
+						
 					} else {
+					
+						utility.showAccounts(accountsToApprove);
 						
-						System.out.println("Nevermind than...");
+						System.out.print("\nWould you like to approve these accounts? (y/n): ");
+						
+						String input = sc.next();
+					
+						if (input.equals("y")) {
+							
+							for (Account a : accountsToApprove) {
+								a.setStatus(new Status(2, "open"));
+								accountDAO.updateAccount(a);
+							}
+							
+							System.out.println("Complete!");
+							
+						} else {
+							
+							System.out.println("Nevermind...");
+						}
 					}
 					
 				} else if (adminInput == 4) {

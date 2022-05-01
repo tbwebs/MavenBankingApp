@@ -81,9 +81,7 @@ public class Driver {
 						
 						System.out.print(Janus.customerGreeting());
 
-						ArrayList<Account> currentAccounts = accountDAO.getAccountsbyUsername(currentUser.getUsername());
-						
-						menus.customerMenu(currentUser, currentAccounts, accountDAO, userDAO, linkDAO);
+						menus.customerMenu(currentUser, accountDAO, userDAO, linkDAO);
 						
 					//employee option
 					} else if (currentUserRole == 2) {
@@ -114,14 +112,14 @@ public class Driver {
 					break;
 					
 				case 2:
-	
+					
 					currentUser = utility.registerUser(userDAO);
 					userDAO.createUser(currentUser);
 					
 					if (currentUser.getRole().getRoleId() == 1) {
 	
 						Account newAccount = utility.registerAccount(currentUser, accountDAO, userDAO, linkDAO);
-						accountDAO.createAccount(newAccount);
+						
 					}
 					
 					System.out.println(Janus.successfulRegistration());

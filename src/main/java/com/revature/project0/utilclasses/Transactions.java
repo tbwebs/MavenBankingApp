@@ -24,6 +24,9 @@ public class Transactions implements InterTransactions {
 			
 			account.setBalance(newBalance);
 			
+			System.out.println("Success!");
+
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -50,6 +53,8 @@ public class Transactions implements InterTransactions {
 			} while (newBalance < 0);
 			
 			account.setBalance(newBalance);
+			
+			System.out.println("Success!");
 			
 		} catch (Exception e) {
 			
@@ -84,6 +89,8 @@ public class Transactions implements InterTransactions {
 			
 			fromAccount.setBalance(difference);
 			toAccount.setBalance(sum);
+			
+			System.out.println("Success!");
 			
 		} catch (Exception e) {
 			
