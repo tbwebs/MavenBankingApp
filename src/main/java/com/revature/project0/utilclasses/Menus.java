@@ -70,8 +70,7 @@ public class Menus implements InterMenus {
 	}
 
 	@Override
-	public void employeeMenu(User user, ArrayList<Account> accounts, ArrayList<User> users, AccountDAOImpl accountDAO, UserDAOImpl userDAO,
-			AccountsUsersDAOImpl linkDAO) {
+	public void employeeMenu(User user, ArrayList<Account> accounts, ArrayList<User> users, AccountDAOImpl accountDAO, UserDAOImpl userDAO) {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -109,14 +108,9 @@ public class Menus implements InterMenus {
 					
 					if (input == 1) {
 						
-						String username;
-						do {
-							
-							System.out.print("Enter the username associated with the account(s): ");
-							username = sc.next();
-						
-						} while (!utility.checkUsername(usernameList, username));
-						
+						System.out.print("Enter the username associated with the account(s): ");
+						String username = sc.next();
+
 						ArrayList<Account> selectedAccounts = accountDAO.getAccountsbyUsername(username);
 						
 						for (Account a : selectedAccounts) {
@@ -135,13 +129,13 @@ public class Menus implements InterMenus {
 						utility.showAccounts(accounts);
 					}
 					
-				} else {
+				} else if (employeeInput == 3) {
 					
 					ArrayList<Account> pendingAccounts = accountDAO.getAccountsByStatus(1);
 					
 					utility.showAccounts(pendingAccounts);
 					
-					System.out.println("Would you like to approve these accounts? (y/n)");
+					System.out.print("\nWould you like to approve these accounts? (y/n): ");
 					
 					String input = sc.next();
 					
@@ -149,10 +143,15 @@ public class Menus implements InterMenus {
 						
 						for (Account a : pendingAccounts) {
 							a.setStatus(new Status(2, "open"));
+							accountDAO.updateAccount(a);
 						}
 						System.out.println("Complete!");
 					}
 					
+				} else {
+					
+					System.out.println(Janus.farewell());
+					Thread.sleep(1500);
 				}
 				
 			} while (employeeInput != 0);

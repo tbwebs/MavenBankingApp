@@ -189,7 +189,7 @@ public class AccountDAOImpl implements AccountDAO {
 			pst.setString(1, username);
 			ResultSet rs = pst.executeQuery();
 			
-			while (rs.next()) {
+			if (rs.next()) {
 				
 				accountList.add(new Account(
 						rs.getLong(1),

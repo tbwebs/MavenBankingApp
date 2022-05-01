@@ -83,12 +83,13 @@ public class Driver {
 						
 					} else if (currentUserRole == 2) {
 						
-						System.out.println(Janus.employeeGreeting());
+						System.out.print(Janus.employeeGreeting());
 						
 						ArrayList<Account> allAccounts = accountDAO.getAllAccounts();
 						
 						ArrayList<User> allUsers = userDAO.getAllUsers();
 						
+						menus.employeeMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
 						
 					} else {
 						

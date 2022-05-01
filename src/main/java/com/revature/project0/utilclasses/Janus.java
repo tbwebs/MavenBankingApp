@@ -75,7 +75,8 @@ public class Janus {
 		String menu = new String("How can I help narrow down your search?\n"
 				+ "1 : Lookup by username\n"
 				+ "2 : Lookup by account number\n"
-				+ "3 : Lookup all accounts");
+				+ "3 : Lookup all accounts\n"
+				+ "Input : ");
 		
 		return menu;
 	}
