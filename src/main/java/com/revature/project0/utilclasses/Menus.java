@@ -48,11 +48,26 @@ public class Menus implements InterMenus {
 					
 					if (currentAccounts.size() > 1) {
 						
-						Account fromAccount = utility.chooseAccount(currentAccounts);
-						Account toAccount  = utility.chooseAccount(currentAccounts);
-						trans.transfer(fromAccount, toAccount);
-						accountDAO.updateAccount(toAccount);
-						accountDAO.updateAccount(fromAccount);
+						ArrayList<Account> openAccounts = new ArrayList<Account>();
+						
+						for (Account a : currentAccounts) {
+							if (a.getStatus().getStatusId() == 2)
+								openAccounts.add(a);
+						}
+						
+						if (openAccounts.size() >= 2) {
+							
+							Account fromAccount = utility.chooseAccount(currentAccounts);
+							Account toAccount  = utility.chooseAccount(currentAccounts);
+							trans.transfer(fromAccount, toAccount);
+							accountDAO.updateAccount(toAccount);
+							accountDAO.updateAccount(fromAccount);
+							
+						} else {
+							
+							System.out.println("You don't have enough open accounts. You have to wait for an employee to open them for you.");
+						}
+						
 						
 					} else {
 						

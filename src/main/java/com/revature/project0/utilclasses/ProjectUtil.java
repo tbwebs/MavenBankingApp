@@ -469,8 +469,10 @@ public class ProjectUtil implements InterUtil {
 				
 				count = sc.nextInt();
 				
-				if (count == 0)
+				if (count == 0) {
+					System.out.print("Nevermind...");
 					break;
+				}
 				
 				chosenAccount = accounts.get(count-1);
 				
@@ -480,7 +482,6 @@ public class ProjectUtil implements InterUtil {
 					
 					Thread.sleep(2000);
 				}
-					
 				
 			} while (!checkAccountStatus(chosenAccount));
 			

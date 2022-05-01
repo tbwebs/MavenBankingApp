@@ -1,9 +1,6 @@
 package com.revature.project0.app;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import com.revature.project0.daos.AccountDAOImpl;
 import com.revature.project0.daos.AccountsUsersDAO;

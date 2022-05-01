@@ -2,12 +2,16 @@ package com.revature.project0.utilclasses;
 
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.revature.project0.bankinterfaces.InterTransactions;
 import com.revature.project0.models.Account;
 
 //think about using setter methods in these methods but I think I'll use another transaction method when building the console flow
 
 public class Transactions implements InterTransactions {
+	
+	private static final Logger logger = LogManager.getLogger(Transactions.class);
 
 	@Override
 	public void deposit(Account account) {
@@ -25,7 +29,7 @@ public class Transactions implements InterTransactions {
 			account.setBalance(newBalance);
 			
 			System.out.println("Success!");
-
+			logger.info("Successfully deposited " + amount + " to account " + account.getAccountNumber());
 			
 		} catch (Exception e) {
 			
@@ -38,12 +42,12 @@ public class Transactions implements InterTransactions {
 		
 		double accountBalance = account.getBalance();
 		double newBalance = 0;
-		
+		double amount;
 		try {
 			
 			do {
 				
-				double amount = this.getAmount();
+				amount = this.getAmount();
 				
 				newBalance = accountBalance - amount;
 				
@@ -55,6 +59,7 @@ public class Transactions implements InterTransactions {
 			account.setBalance(newBalance);
 			
 			System.out.println("Success!");
+			logger.info("Successfully withdrew " + amount + " from account " + account.getAccountNumber());
 			
 		} catch (Exception e) {
 			
@@ -70,12 +75,13 @@ public class Transactions implements InterTransactions {
 		double reciever = toAccount.getBalance();
 		double difference = 0;
 		double sum = 0;
+		double amount;
 
 		try {
 			
 			do {
 				
-				double amount = this.getAmount();
+				amount = this.getAmount();
 				
 				difference = from - amount;
 				
@@ -91,6 +97,7 @@ public class Transactions implements InterTransactions {
 			toAccount.setBalance(sum);
 			
 			System.out.println("Success!");
+			logger.info("Successfully transfered " + amount + " to account " + toAccount.getAccountNumber() + " from account " + fromAccount.getAccountNumber());
 			
 		} catch (Exception e) {
 			

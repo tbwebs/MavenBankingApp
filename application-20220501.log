@@ -1,0 +1,4 @@
+2022-05-01 16:10:31.777 [main] INFO  com.revature.project0.utilclasses.Transactions - Successfully deposited 10.0 to account 876682024990667
+2022-05-01 16:14:30.145 [main] INFO  com.revature.project0.utilclasses.Transactions - Successfully deposited 10.0 to account 9495060244743328
+2022-05-01 16:33:03.241 [main] INFO  com.revature.project0.utilclasses.Transactions - Successfully withdrew 10.0 from account 9495060244743328
+2022-05-01 16:52:55.214 [main] INFO  com.revature.project0.utilclasses.Transactions - Successfully withdrew 25.0 from account 7116729573889751
