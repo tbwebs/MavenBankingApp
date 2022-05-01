@@ -22,7 +22,7 @@ public class TestDriver {
 //		UserDAOImpl userDao = new UserDAOImpl();
 //		AccountsUsersDAOImpl linkDao = new AccountsUsersDAOImpl();
 //		ProjectUtil utility = new ProjectUtil();
-		
+//		
 //		Account personalAccount = new Account(utility.generateAccountNumber(), utility.generateRoutingNumber(), 100, new Type(1, "personal"), new Status(1, "pending"));
 //		Account secondPersonal = new Account(utility.generateAccountNumber(), utility.generateRoutingNumber(), 20, new Type(1, "personal"), new Status(2, "open"));
 //		
@@ -38,8 +38,7 @@ public class TestDriver {
 //		AccountsUsers jointlink = new AccountsUsers(3, "crg", 9959179783534336L);
 //		AccountsUsers jointlink2 = new AccountsUsers(3, "gryphon", 9959179783534336L);
 
-		
-		
+
 	}
 
 }

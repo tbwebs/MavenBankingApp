@@ -51,7 +51,7 @@ public interface InterUtil {
 	// creates new 
 	User registerUser(UserDAOImpl userDAO);
 	
-	Account registerAccount(UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO);
+	Account registerAccount(User currentUser,AccountDAOImpl accountDAO, UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO);
 	
 	int selectRegisterAccountType();
 	

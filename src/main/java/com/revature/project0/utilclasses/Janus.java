@@ -13,7 +13,7 @@ public class Janus {
 	
 	public static String welcomeMenu() {
 		
-		String menu = new String("1 : Log In\n"
+		String menu = new String("\n1 : Log In\n"
 				+ "2 : Register\n"
 				+ "Input: ");
 		

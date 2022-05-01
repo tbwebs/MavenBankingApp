@@ -181,7 +181,10 @@ public class AccountDAOImpl implements AccountDAO {
 		Connection conn = ConnectionManager.getConnection();
 		
 		ArrayList<Account> accountList = new ArrayList<Account>();
-		String query = "SELECT accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users INNER JOIN accounts ON accounts_users.account_num = accounts.account_num INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.username = ?";
+		String query = "SELECT accounts.account_num, accounts.routing_num, accounts.balance, account_type.account_type_id, account_type.account_type, account_status.account_status_id, account_status.account_status FROM accounts_users "
+				+ "INNER JOIN accounts ON accounts_users.account_num = accounts.account_num "
+				+ "INNER JOIN account_type ON accounts.account_type_id = account_type.account_type_id "
+				+ "INNER JOIN account_status ON accounts.account_status_id = account_status.account_status_id WHERE accounts_users.username = ?";
 		
 		try {
 			
@@ -189,7 +192,7 @@ public class AccountDAOImpl implements AccountDAO {
 			pst.setString(1, username);
 			ResultSet rs = pst.executeQuery();
 			
-			if (rs.next()) {
+			while (rs.next()) {
 				
 				accountList.add(new Account(
 						rs.getLong(1),

@@ -133,11 +133,12 @@ public class ProjectUtil implements InterUtil {
 	}
 
 	@Override
-	public Account registerAccount(UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO) {
+	public Account registerAccount(User currentUser, AccountDAOImpl accountDAO, UserDAOImpl userDAO, AccountsUsersDAOImpl linkDAO) {
 		
-		Account currentAccount = new Account();
-		Type currentType = new Type();
+		Account newAccount = new Account();
+		Type newType = new Type();
 		Status pendingStatus = new Status(1, "pending");
+		AccountsUsers link = new AccountsUsers();
 		long newAccountNum = this.generateAccountNumber();
 		long newRoutingNum = this.generateRoutingNumber();
 		double initialDeposit;
@@ -151,32 +152,51 @@ public class ProjectUtil implements InterUtil {
 			
 			if (typeSelection == 1) {
 				
-				currentType.setTypeId(1);
-				currentType.setType("personal");
+				newType.setTypeId(1);
+				newType.setType("personal");
+				
+				initialDeposit = this.getInitialDeposit();
+				newAccount.setBalance(initialDeposit);
+				newAccount.setAccountNumber(newAccountNum);
+				newAccount.setRoutingNumber(newRoutingNum);
+				newAccount.setType(newType);
+				newAccount.setStatus(pendingStatus);
+				
+				accountDAO.createAccount(newAccount);
+				
+				int count = linkDAO.getLinkCount();
+				link = new AccountsUsers(count + 1, currentUser.getUsername(), newAccount.getAccountNumber());
+				linkDAO.createAccountsUsersLink(link);
 				
 			} else {
 				
-				System.out.println("Please register the second account holder.");
+				AccountsUsers jointLink = new AccountsUsers();
+				
+				System.out.println("\nPlease register the second account holder.");
 				User secondUser = this.registerUser(userDAO);
-				userDAO.createUser(secondUser);	
+				userDAO.createUser(secondUser);
+				
+				newType.setTypeId(2);
+				newType.setType("joint");
+				
+				initialDeposit = this.getInitialDeposit();
+				newAccount.setBalance(initialDeposit);
+				newAccount.setAccountNumber(newAccountNum);
+				newAccount.setRoutingNumber(newRoutingNum);
+				newAccount.setType(newType);
+				newAccount.setStatus(pendingStatus);
+				
+				accountDAO.createAccount(newAccount);
 				
 				int count = linkDAO.getLinkCount();
-				AccountsUsers secondLink = new AccountsUsers(count + 1, secondUser.getUsername(), newAccountNum);
-				linkDAO.createAccountsUsersLink(secondLink);
+				link = new AccountsUsers(count + 1, currentUser.getUsername(), newAccount.getAccountNumber());
+				linkDAO.createAccountsUsersLink(link);
 				
-				currentType.setTypeId(2);
-				currentType.setType("joint");
+				int jointCount = linkDAO.getLinkCount();
+				jointLink = new AccountsUsers(jointCount + 1, secondUser.getUsername(), newAccount.getAccountNumber());
+				linkDAO.createAccountsUsersLink(link);
 				
 			}
-						
-			initialDeposit = this.getInitialDeposit();
-	
-			currentAccount.setAccountNumber(newAccountNum);
-			currentAccount.setRoutingNumber(newRoutingNum);
-			currentAccount.setBalance(initialDeposit);
-			currentAccount.setType(currentType);
-			currentAccount.setStatus(pendingStatus);
-			
 			
 		} catch (Exception e) {
 			
@@ -184,9 +204,11 @@ public class ProjectUtil implements InterUtil {
 			
 		}
 		
-		return currentAccount;
+		return newAccount;
 	}
 	
+	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
+	// Max of 17 digits
 	public long generateAccountNumber() {
 		
 		int min = 1;
@@ -197,6 +219,18 @@ public class ProjectUtil implements InterUtil {
 		return randomNumber;
 	}
 	
+	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
+	// 9 digits
+	public long generateRoutingNumber() {
+		
+		int min = 1;
+		long max = 100000000L;
+		
+		long randomNumber = (long) Math.floor(Math.random()*(max-min+1)+min);
+		
+		return randomNumber;
+		
+	}
 	
 	public int validAccountViewMenu() {
 		
@@ -221,19 +255,6 @@ public class ProjectUtil implements InterUtil {
 		} while (numInput < 0|| numInput > 3);
 		
 		return numInput;
-	}
-	
-	// formula from <https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java>
-	// 9 digits
-	public long generateRoutingNumber() {
-		
-		int min = 1;
-		long max = 100000000L;
-		
-		long randomNumber = (long) Math.floor(Math.random()*(max-min+1)+min);
-		
-		return randomNumber;
-		
 	}
 
 	/*
@@ -493,7 +514,7 @@ public class ProjectUtil implements InterUtil {
 		Scanner sc = new Scanner(System.in);
 		
 		do {
-			System.out.print("What kind of account do you want to open?\n"
+			System.out.print("\nWhat kind of account do you want to open?\n"
 					+ "1 : personal\n"
 					+ "2 : joint\n"
 					+ "Input: ");

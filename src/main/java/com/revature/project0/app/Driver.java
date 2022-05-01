@@ -40,7 +40,7 @@ public class Driver {
 		ArrayList<String> credentials;
 		User currentUser;
 
-		System.out.println(Janus.janusGreeting());
+		System.out.print(Janus.janusGreeting());
 		
 		//controls main driver loop. REMOVE IF you are  getting weird infinite loops.
 		boolean run = true;
@@ -52,38 +52,40 @@ public class Driver {
 			menuSelection = utility.validWelcomeMenuInput();
 			
 			switch (menuSelection) {
-			
+				
+				//user chose to exit app.
 				case 0:
 					
 					System.out.println(Janus.farewell());
 					run = false;
 					break;
-					
+				
+				//user is logging in
 				case 1:
-					/*
-					 * here I'm checking for role to determine which menus and options to display for user.
-					 * 
-					 * Keep working in driver to see if it works then refactor each part to make menu methods that I can call.
-					 *
-					 * */
+					
+					//this holds the username and password of user, login() method checks if user exists in database
 					credentials = utility.login(userDAO);
 					
+					//checks if user wants to exit
 					if (credentials.contains("0"))
 						break;
 					
+					//grabs current user from
 					currentUser = userDAO.getUserByUsername(credentials.get(0));
 					
+					//checks for role for appropriate menu below
 					int currentUserRole = userDAO.getUserByUsername(credentials.get(0)).getRole().getRoleId();
 					
-					//customer
+					//customer option
 					if (currentUserRole == 1) {
 						
-						System.out.println(Janus.customerGreeting());
+						System.out.print(Janus.customerGreeting());
 
 						ArrayList<Account> currentAccounts = accountDAO.getAccountsbyUsername(currentUser.getUsername());
 						
 						menus.customerMenu(currentUser, currentAccounts, accountDAO, userDAO, linkDAO);
 						
+					//employee option
 					} else if (currentUserRole == 2) {
 						
 						System.out.print(Janus.employeeGreeting());
@@ -94,6 +96,7 @@ public class Driver {
 						
 						menus.employeeMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
 						
+					//admin option
 					} else if (currentUserRole == 3) {
 						
 						System.out.print(Janus.adminGreeting());
@@ -103,6 +106,7 @@ public class Driver {
 						ArrayList<User> allUsers = userDAO.getAllUsers();
 						
 						menus.adminMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
+						
 					} else {
 						
 						continue;
@@ -116,17 +120,11 @@ public class Driver {
 					
 					if (currentUser.getRole().getRoleId() == 1) {
 	
-						Account newAccount = utility.registerAccount(userDAO, linkDAO);
+						Account newAccount = utility.registerAccount(currentUser, accountDAO, userDAO, linkDAO);
 						accountDAO.createAccount(newAccount);
-						
-						int linkid = linkDAO.getLinkCount();
-						AccountsUsers newLink = new AccountsUsers(linkid + 1, currentUser.getUsername(), newAccount.getAccountNumber());
-						
-						linkDAO.createAccountsUsersLink(newLink);
 					}
 					
 					System.out.println(Janus.successfulRegistration());
-					
 					break;
 				
 			}

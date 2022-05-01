@@ -92,6 +92,7 @@ public class Transactions implements InterTransactions {
 
 	}
 
+	//helper method for getting numeric input
 	@Override
 	public double getAmount() {
 	

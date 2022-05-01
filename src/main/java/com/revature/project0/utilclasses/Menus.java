@@ -53,7 +53,7 @@ public class Menus implements InterMenus {
 					
 				} else if (customerInput == 5) {
 					
-					utility.registerAccount(userDAO, linkDAO);
+					utility.registerAccount(user, accountDAO, userDAO, linkDAO);
 					
 				} else {
 					
@@ -101,7 +101,7 @@ public class Menus implements InterMenus {
 						
 					} else {
 						
-						System.out.println("I can't seem to find that user.");
+						System.out.println("\nI can't seem to find that user.");
 					}
 					
 				} else if (employeeInput == 2) {
@@ -110,7 +110,7 @@ public class Menus implements InterMenus {
 					
 					if (input == 1) {
 						
-						System.out.print("Enter the username associated with the account(s): ");
+						System.out.print("\nEnter the username associated with the account(s): ");
 						String username = sc.next();
 
 						ArrayList<Account> selectedAccounts = accountDAO.getAccountsbyUsername(username);
@@ -121,7 +121,7 @@ public class Menus implements InterMenus {
 						
 					} else if (input == 2) {
 						
-						System.out.print("Enter the account number: ");
+						System.out.print("\nEnter the account number: ");
 						long accountNumber = sc.nextLong();
 						
 						System.out.println(accountDAO.getAccountByAccountNumber(accountNumber));
@@ -154,7 +154,7 @@ public class Menus implements InterMenus {
 					
 					if (accountsToApprove.size() == 0) {
 						
-						System.out.print("All accounts are open.");
+						System.out.print("\nAll accounts are open.");
 						continue;
 						
 					} else {
