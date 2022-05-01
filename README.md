@@ -53,4 +53,13 @@ The goal of Project0 of my Revature training program is to build this Java banki
 - Improve the Javalin implementation to utilize forms and HTML for a prettier front end.
 - Allow users to update their personal information.
 - Allow employees and admins to hold accounts.
-- Add color output and add more text output for improved clarity of operations.
+- Add color output and more concise text output for improved clarity of operations.
+- Implement serialization in order to save a current session to return to.
+- Connect user with their account when viewing accounts.
+- Add more input checks for `Scanner.nex()` method throughout the app.
+
+## **Conclusion**
+
+Building this application was a great challenge for me. I've never built an application this comprehensive of different technologies and it was fulfilling to have something working at the end. I feel like I understand scope, and Java loops significantly more now. While working on a project of this size I realized the importance of breaking up features and fully testing each feature before moving onto another aspect of the project. It was really easy for me to think of a better implementation of some other feature while I was working on another feature related to it. Often I went back and rewrote code, which was a terribly inefficient use of my time. 
+
+I think the overall lesson I'll take from this project is to be overly organized and specific at the beginning when planning, then stay focused on that plan when building the project. When things are working at the end it's easier to go back and make aspects more efficient, instead of doing it in the middle of one aspect of the project. I hope to come back to this project and make things better in the future.

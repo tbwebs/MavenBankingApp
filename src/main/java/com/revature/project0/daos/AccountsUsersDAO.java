@@ -10,7 +10,7 @@ public interface AccountsUsersDAO {
 	
 	public AccountsUsers getAccountsUsersLinkById(int accountsUsersId);
 	
-	public void deleteAccountsUsersById(int linkId);
+	public void deleteAccountsUsersByAccountNumber(long accountNumber);
 	
 	public int getLinkCount();
 	

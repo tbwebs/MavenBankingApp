@@ -13,7 +13,7 @@ public class Janus {
 	
 	public static String welcomeMenu() {
 		
-		String menu = new String("\n1 : Log In\n"
+		String menu = new String("1 : Log In\n"
 				+ "2 : Register\n"
 				+ "Input: ");
 		
@@ -64,13 +64,13 @@ public class Janus {
 		
 		String menu = new String("\n1 : Lookup User\n"
 				+ "2 : Lookup Account\n"
-				+ "3 : View Account Applications\n"
+				+ "3 : View Account Applications (all pending/closed accounts)\n"
 				+ "Input: ");
 		
 		return menu;
 	}
 	
-	public static String employeeAccountLookupMenu() {
+	public static String accountLookupMenu() {
 		
 		String menu = new String("How can I help narrow down your search?\n"
 				+ "1 : Lookup by username\n"
@@ -84,7 +84,7 @@ public class Janus {
 	public static String adminGreeting() {
 		
 		String menu = new String("\nHey boss, I heard rumors about Alexa taking over?\n"
-				+ "Hope that means a promotion for your best assitant... right?...\n\n");
+				+ "Hope that means a promotion for your best assitant... right?...\n");
 		
 		return menu;
 	}
@@ -93,7 +93,7 @@ public class Janus {
 		
 		String menu = new String("\n1 : Lookup User\n"
 				+ "2 : Lookup Account\n"
-				+ "3 : View Account Applications\n"
+				+ "3 : View Account Applications (all pending/closed accounts)\n"
 				+ "4 : Deposit\n"
 				+ "5 : Withdraw\n"
 				+ "6 : Transfer\n"

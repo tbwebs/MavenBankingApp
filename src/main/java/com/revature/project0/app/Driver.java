@@ -26,6 +26,7 @@ public class Driver {
 		
 	public static void main(String[] args) {
 
+		//DAOS
 		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		UserDAOImpl userDAO = new UserDAOImpl();
 		TypeDAOImpl typeDAO = new TypeDAOImpl();
@@ -35,17 +36,19 @@ public class Driver {
 		ProjectUtil utility = new ProjectUtil();
 		Menus menus = new Menus();
 		
+		//Variables for log in
 		ArrayList<String> credentials;
 		User currentUser;
-		
-			
+
 		System.out.println(Janus.janusGreeting());
 		
 		//controls main driver loop. REMOVE IF you are  getting weird infinite loops.
 		boolean run = true;
+		
 		int menuSelection;
 		
 		do {
+			//checks for valid number input. Options are for logging in, registering, or quitting the app.
 			menuSelection = utility.validWelcomeMenuInput();
 			
 			switch (menuSelection) {
@@ -91,21 +94,22 @@ public class Driver {
 						
 						menus.employeeMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
 						
+					} else if (currentUserRole == 3) {
+						
+						System.out.print(Janus.adminGreeting());
+						
+						ArrayList<Account> allAccounts = accountDAO.getAllAccounts();
+						
+						ArrayList<User> allUsers = userDAO.getAllUsers();
+						
+						menus.adminMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
 					} else {
 						
-						//admin
+						continue;
 					}
 					break;
 					
 				case 2:
-					
-					/*
-					 * This is when there is a new user and need they are registered.
-					 * 
-					 * Exit them out of this and make them login again so they can go through the logic above.
-					 * 
-					 * need to check for user role here too to determine if I need to make a AccountUser link.
-					 * */
 	
 					currentUser = utility.registerUser(userDAO);
 					userDAO.createUser(currentUser);
@@ -122,6 +126,7 @@ public class Driver {
 					}
 					
 					System.out.println(Janus.successfulRegistration());
+					
 					break;
 				
 			}

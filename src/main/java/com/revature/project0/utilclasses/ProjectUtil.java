@@ -204,13 +204,13 @@ public class ProjectUtil implements InterUtil {
 		int numInput;
 		
 		do {
-			System.out.print(Janus.employeeAccountLookupMenu());
+			System.out.print(Janus.accountLookupMenu());
 			
 			while (!sc.hasNextInt()) {
 				
 				String input = sc.next();
 				System.out.println("\nInvalid input, try again.");
-				System.out.print(Janus.employeeAccountLookupMenu());
+				System.out.print(Janus.accountLookupMenu());
 			}
 			
 			numInput = sc.nextInt();

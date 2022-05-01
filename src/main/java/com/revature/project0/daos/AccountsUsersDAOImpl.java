@@ -62,16 +62,16 @@ public class AccountsUsersDAOImpl implements AccountsUsersDAO {
 
 
 	@Override //TESTED
-	public void deleteAccountsUsersById(int linkId) {
+	public void deleteAccountsUsersByAccountNumber(long accountNumber) {
 		
 		Connection conn = ConnectionManager.getConnection();
 		
-		String query = "DELETE FROM accounts_users WHERE accounts_users_id = ?";
+		String query = "DELETE FROM accounts_users WHERE account_num = ?";
 		
 		try {
 			
 			PreparedStatement pst = conn.prepareStatement(query);
-			pst.setInt(1, linkId);
+			pst.setLong(1, accountNumber);
 			pst.execute();
 			
 		} catch (SQLException e) {
