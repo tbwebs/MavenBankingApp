@@ -6,6 +6,24 @@ The goal of Project0 of my Revature training program is to build this Java banki
 
 ## **Classes**
 
+#### **Transactions**
+
+- This method holds the `withdrawal`, `deposit`, and `transfer` methods that the customer can perform when their specific account is open.
+
+#### **Janus**
+
+- This class simply holds the various `String` objects which interact with the user during the console session. `Janus` informs the user about what they should do, or let them know about invalid inputs. I tried to have some fun with his messages.
+
+#### **Menus**
+
+- This class has three methods: `customerMenu`, `employeeMenu`, and `adminMenu`. Each method provides the logic flow for the `Driver` class's `main` method depending on which role the application user is.
+
+#### **ProjectUtil**
+
+- This class holds a variety of helper methods used by many of the other classes methods. The most notable methods are the `login`, `registerUser`, and `registerAccount` methods which are integral to the console flow. 
+
+## **DAO Interfaces/Models**
+
 #### **User**
 
 - The `User` class provides all the personal information about whichever user is logged into the application. They hold the name, username, password, email for the application to access for various opperations.
@@ -29,18 +47,6 @@ The goal of Project0 of my Revature training program is to build this Java banki
 #### **AccountsUsers**
 
 - This class simply holds the `account_id` and `user_id` for linking each user with their account(s). Primarily exists for database management.
-
-#### **Transactions**
-
-- This method holds the `withdrawal`, `deposit`, and `transfer` methods that the customer can perform when their specific account is open.
-
-#### **Janus**
-
-- This class simply holds the various `String` objects which interact with the user during the console session. `Janus` informs the user about what they should do, or let them know about invalid inputs. I tried to have some fun with his messages.
-
-#### **Menus**
-
-- This class has three methods: `customerMenu`, `employeeMenu`, and `adminMenu`. Each method provides the logic flow for the `Driver` class's `main` method depending on which role the application user is.
 
 ## **Future Improvements**
 
