@@ -80,7 +80,8 @@ public class Driver {
 					if (currentUserRole == 1) {
 						
 						System.out.print(Janus.customerGreeting());
-
+						
+						//loop method implementing customers options with their account
 						menus.customerMenu(currentUser, accountDAO, userDAO, linkDAO);
 						
 					//employee option
@@ -88,10 +89,11 @@ public class Driver {
 						
 						System.out.print(Janus.employeeGreeting());
 						
+						//gets users and accounts list for employee menu
 						ArrayList<Account> allAccounts = accountDAO.getAllAccounts();
-						
 						ArrayList<User> allUsers = userDAO.getAllUsers();
 						
+						//loop method implementing employee options with their account
 						menus.employeeMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
 						
 					//admin option
@@ -100,26 +102,30 @@ public class Driver {
 						System.out.print(Janus.adminGreeting());
 						
 						ArrayList<Account> allAccounts = accountDAO.getAllAccounts();
-						
 						ArrayList<User> allUsers = userDAO.getAllUsers();
 						
+						//loop method implementing admin options with their account
 						menus.adminMenu(currentUser, allAccounts, allUsers, accountDAO, userDAO);
 						
 					} else {
 						
+						//control statement
 						continue;
 					}
 					break;
 					
+				// register new user. Logs user out once account is created. If it's a customer they will make an account before logging out
 				case 2:
 					
+					//creates new user
 					currentUser = utility.registerUser(userDAO);
 					userDAO.createUser(currentUser);
 					
+					//checks if user is a customer
 					if (currentUser.getRole().getRoleId() == 1) {
-	
-						Account newAccount = utility.registerAccount(currentUser, accountDAO, userDAO, linkDAO);
 						
+						//creates account with associated user
+						Account newAccount = utility.registerAccount(currentUser, accountDAO, userDAO, linkDAO);
 					}
 					
 					System.out.println(Janus.successfulRegistration());
@@ -127,6 +133,7 @@ public class Driver {
 				
 			}
 			
+			//checks for run variable so can break out of loop
 			if (!run)
 				break;
 			

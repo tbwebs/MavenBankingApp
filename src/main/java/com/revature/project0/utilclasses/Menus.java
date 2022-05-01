@@ -66,7 +66,7 @@ public class Menus implements InterMenus {
 					
 				} else {
 					
-					System.out.println(Janus.farewell());
+					System.out.println(Janus.logOut());
 					Thread.sleep(1500);
 				}
 				
@@ -190,7 +190,7 @@ public class Menus implements InterMenus {
 					
 				} else {
 					
-					System.out.println(Janus.farewell());
+					System.out.println(Janus.logOut());
 					Thread.sleep(1500);
 				}
 				
@@ -347,7 +347,7 @@ public class Menus implements InterMenus {
 				
 				} else {
 					
-					System.out.println(Janus.farewell());
+					System.out.println(Janus.logOut());
 					Thread.sleep(1500);
 				}
 				
