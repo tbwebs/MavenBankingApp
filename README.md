@@ -56,7 +56,7 @@ The goal of Project0 of my Revature training program is to build this Java banki
 - Add color output and more concise text output for improved clarity of operations.
 - Implement serialization in order to save a current session to return to.
 - Connect user with their account when viewing accounts.
-- Add more input checks for `Scanner.nex()` method throughout the app.
+- Add more input checks for `Scanner.next()` method throughout the app.
 
 ## **Conclusion**
 
