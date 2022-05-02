@@ -97,7 +97,7 @@ public class Janus {
 				+ "4 : Deposit\n"
 				+ "5 : Withdraw\n"
 				+ "6 : Transfer\n"
-				+ "7 : Cancel Account\n"
+				+ "7 : Close Account\n"
 				+ "Input: ");
 		
 		return menu;
