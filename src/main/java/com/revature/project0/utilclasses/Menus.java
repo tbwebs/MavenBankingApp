@@ -35,14 +35,31 @@ public class Menus implements InterMenus {
 				} else if (customerInput == 2) {
 					
 					Account depositAccount = utility.chooseAccount(currentAccounts);
-					trans.deposit(depositAccount);
-					accountDAO.updateAccount(depositAccount);
+					
+					if (depositAccount == null) {
+						
+						break;
+						
+					} else {
+						
+						trans.deposit(depositAccount);
+						accountDAO.updateAccount(depositAccount);
+					}
+					
 					
 				} else if (customerInput == 3) {
 					
 					Account withdrawalAccount = utility.chooseAccount(currentAccounts);
-					trans.withdraw(withdrawalAccount);
-					accountDAO.updateAccount(withdrawalAccount);
+					
+					if (withdrawalAccount == null) {
+						break;
+						
+					} else {
+						
+						trans.withdraw(withdrawalAccount);
+						accountDAO.updateAccount(withdrawalAccount);
+					}
+					
 					
 				} else if (customerInput == 4) {
 					
@@ -59,9 +76,17 @@ public class Menus implements InterMenus {
 							
 							Account fromAccount = utility.chooseAccount(currentAccounts);
 							Account toAccount  = utility.chooseAccount(currentAccounts);
-							trans.transfer(fromAccount, toAccount);
-							accountDAO.updateAccount(toAccount);
-							accountDAO.updateAccount(fromAccount);
+							
+							if (fromAccount == null || toAccount == null) {
+								
+								break;
+								
+							} else {
+								
+								trans.transfer(fromAccount, toAccount);
+								accountDAO.updateAccount(toAccount);
+								accountDAO.updateAccount(fromAccount);
+							}
 							
 						} else {
 							
@@ -123,6 +148,10 @@ public class Menus implements InterMenus {
 						
 						System.out.println(userDAO.getUserByUsername(input));
 						
+					} else if (input.equals("0")) {
+						
+						break;
+						
 					} else {
 						
 						System.out.println("\nI can't seem to find that user.");
@@ -150,9 +179,13 @@ public class Menus implements InterMenus {
 						
 						System.out.println(accountDAO.getAccountByAccountNumber(accountNumber));
 						
-					} else {
+					} else if (input == 3) {
 						
 						utility.showAccounts(accounts);
+						
+					} else {
+						
+						break;
 					}
 					
 				} else if (employeeInput == 3) {
@@ -250,6 +283,10 @@ public class Menus implements InterMenus {
 						
 						System.out.println(userDAO.getUserByUsername(input));
 						
+					} else if (input.equals("0")) {
+						
+						break;
+						
 					} else {
 						
 						System.out.println("I can't seem to find that user.");
@@ -277,9 +314,13 @@ public class Menus implements InterMenus {
 						
 						System.out.println(accountDAO.getAccountByAccountNumber(accountNumber));
 						
-					} else {
+					} else if (input == 3){
 						
 						utility.showAccounts(accounts);
+						
+					} else {
+						
+						break;
 					}
 					
 				} else if (adminInput == 3) {
@@ -335,30 +376,66 @@ public class Menus implements InterMenus {
 				} else if (adminInput == 4) {
 					
 					Account depositAccount = utility.chooseAccount(accounts);
-					trans.deposit(depositAccount);
-					accountDAO.updateAccount(depositAccount);
+					
+					if (depositAccount == null) {
+						
+						break;
+						
+					} else {
+						
+						trans.deposit(depositAccount);
+						accountDAO.updateAccount(depositAccount);
+					}
+					
 					
 				} else if (adminInput == 5) {
 					
 					Account withdrawalAccount = utility.chooseAccount(accounts);
-					trans.withdraw(withdrawalAccount);
-					accountDAO.updateAccount(withdrawalAccount);
+					
+					if (withdrawalAccount == null) {
+						
+						break;
+						
+					} else {
+						
+						trans.withdraw(withdrawalAccount);
+						accountDAO.updateAccount(withdrawalAccount);
+					}
+					
 					
 				} else if (adminInput == 6) {
 					
 					Account fromAccount = utility.chooseAccount(accounts);
 					Account toAccount  = utility.chooseAccount(accounts);
-					trans.transfer(fromAccount, toAccount);
-					accountDAO.updateAccount(toAccount);
-					accountDAO.updateAccount(fromAccount);
+					
+					if (fromAccount == null || toAccount == null) {
+						
+						break;
+						
+					} else {
+						
+						trans.transfer(fromAccount, toAccount);
+						accountDAO.updateAccount(toAccount);
+						accountDAO.updateAccount(fromAccount);
+					}
+					
 					
 				} else if (adminInput == 7) {
 					
 					System.out.println("Choose which account you'd like to close:");
 					Account canceledAccount = utility.chooseAccount(accounts);
-					canceledAccount.setStatus(new Status(3, "closed"));
-					accountDAO.updateAccount(canceledAccount);
-					System.out.print("The selected account has been closed.");
+					
+					if (canceledAccount == null) {
+						
+						break;
+						
+					} else {
+						
+						canceledAccount.setStatus(new Status(3, "closed"));
+						accountDAO.updateAccount(canceledAccount);
+						System.out.print("The selected account has been closed.");
+					}
+				
 				
 				} else {
 					

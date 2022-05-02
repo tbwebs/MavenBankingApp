@@ -471,7 +471,7 @@ public class ProjectUtil implements InterUtil {
 				
 				if (count == 0) {
 					System.out.print("Nevermind...");
-					break;
+					return null;
 				}
 				
 				chosenAccount = accounts.get(count-1);
