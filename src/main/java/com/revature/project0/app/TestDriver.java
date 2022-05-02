@@ -2,6 +2,7 @@ package com.revature.project0.app;
 
 import java.util.ArrayList;
 
+import com.revature.project0.controllers.UserController;
 import com.revature.project0.daos.AccountDAOImpl;
 import com.revature.project0.daos.AccountsUsersDAOImpl;
 import com.revature.project0.daos.UserDAOImpl;
@@ -13,6 +14,8 @@ import com.revature.project0.models.Type;
 import com.revature.project0.models.User;
 import com.revature.project0.utilclasses.ProjectUtil;
 import com.revature.project0.utilclasses.Transactions;
+
+import io.javalin.Javalin;
 
 public class TestDriver {
 
@@ -37,7 +40,6 @@ public class TestDriver {
 //		AccountsUsers vicLink = new AccountsUsers(1, "gryphon", 5136705021216027L);
 //		AccountsUsers jointlink = new AccountsUsers(3, "crg", 9959179783534336L);
 //		AccountsUsers jointlink2 = new AccountsUsers(3, "gryphon", 9959179783534336L);
-
 
 	}
 

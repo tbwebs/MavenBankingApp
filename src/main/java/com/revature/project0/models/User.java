@@ -3,7 +3,7 @@ package com.revature.project0.models;
 //This class will model user database. role will be customer/employee/admin.
 public class User {
 	
-	private String firstName, lastName, username, password, email;
+	private String username, password, firstName,lastName, email;
 	private Role role;
 	
 	public User() { super(); }

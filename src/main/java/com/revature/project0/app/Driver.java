@@ -2,6 +2,7 @@ package com.revature.project0.app;
 
 import java.util.ArrayList;
 
+import com.revature.project0.controllers.UserController;
 import com.revature.project0.daos.AccountDAOImpl;
 import com.revature.project0.daos.AccountsUsersDAO;
 import com.revature.project0.daos.AccountsUsersDAOImpl;
@@ -18,6 +19,8 @@ import com.revature.project0.models.User;
 import com.revature.project0.utilclasses.Janus;
 import com.revature.project0.utilclasses.Menus;
 import com.revature.project0.utilclasses.ProjectUtil;
+
+import io.javalin.Javalin;
 
 public class Driver {
 		
@@ -135,6 +138,10 @@ public class Driver {
 				break;
 			
 		} while (run);
+		
+		Javalin app = Javalin.create().start(7070);
+		
+		UserController userController = new UserController(app);
 		
 	}
 }
