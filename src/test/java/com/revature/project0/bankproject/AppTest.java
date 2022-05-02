@@ -44,7 +44,7 @@ public class AppTest
 //		assertEquals(pUtil.validWelcomeMenuInput(), 0);
 //		assertEquals(pUtil.validWelcomeMenuInput(), 1);
 //		assertEquals(pUtil.validWelcomeMenuInput(), 2);
-	
+//	
 //	@Test
 //	public void testCustomerMenu() {
 //		assertEquals(pUtil.validCustomerMenuInput(), 0);
@@ -89,7 +89,6 @@ public class AppTest
 		
 	}
 	
-	
 	@Test
 	public void testAccountStatus() {
 		
@@ -106,7 +105,7 @@ public class AppTest
 		testUsernames.add(vic.getUsername());
 		
 		assertTrue(pUtil.checkUsername(testUsernames, "gryphon"));
-		assertTrue(pUtil.checkUsername(testUsernames, "mia"));
+		assertFalse(pUtil.checkUsername(testUsernames, "mia"));
 		
 	}
 	

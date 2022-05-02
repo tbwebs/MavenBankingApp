@@ -446,6 +446,7 @@ public class ProjectUtil implements InterUtil {
 		
 	}
 	
+	//TODO implement check for count being too big or small.
 	public Account chooseAccount(ArrayList<Account> accounts) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -475,6 +476,8 @@ public class ProjectUtil implements InterUtil {
 				}
 				
 				chosenAccount = accounts.get(count-1);
+			
+				
 				
 				if (!checkAccountStatus(chosenAccount)) {
 					System.out.println("That account is either closed or pending.\n"
